@@ -133,6 +133,22 @@ enum Permissions {
     /// Accessibility is required both to observe the hotkey and to send the paste keystroke.
     static var accessibility: Bool { AXIsProcessTrusted() }
 
+    /// True when the app is not trusted yet a grant for it already exists, which is what
+    /// happens after a rebuild changes the ad-hoc signature. The row must be removed and
+    /// re-added; toggling it does nothing.
+    static var hasStaleEntry: Bool {
+        guard !accessibility else { return false }
+        let p = Process()
+        p.executableURL = URL(fileURLWithPath: "/usr/bin/sqlite3")
+        p.arguments = ["/Library/Application Support/com.apple.TCC/TCC.db",
+                       "select count(*) from access where service='kTCCServiceAccessibility' and client like '%murmur%';"]
+        let out = Pipe(); p.standardOutput = out; p.standardError = Pipe()
+        guard (try? p.run()) != nil else { return false }
+        p.waitUntilExit()
+        let s = String(data: out.fileHandleForReading.readDataToEndOfFile(), encoding: .utf8) ?? ""
+        return (Int(s.trimmingCharacters(in: .whitespacesAndNewlines)) ?? 0) > 0
+    }
+
     static func requestAccessibility() {
         let opts = [kAXTrustedCheckOptionPrompt.takeUnretainedValue() as String: true] as CFDictionary
         _ = AXIsProcessTrustedWithOptions(opts)

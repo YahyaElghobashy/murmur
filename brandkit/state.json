@@ -1,0 +1,49 @@
+{
+  "brandbookElements": [],
+  "essentialKitApproved": false,
+  "logo": {
+    "approvalSummary": "User selected the decay mark: solid disc with three fading half-discs.",
+    "asset": {
+      "path": "/Users/yahyaelghobashy/Yahya/Side Projects 🚀/Whisperbar/brandkit/logo/murmur-mark.svg"
+    },
+    "geometryFingerprint": "4dc43dac6099907759ce06f8b8c105fdf13218aede48da3dcd85747872d6578c",
+    "name": "Murmur decay mark",
+    "origin": "brandkit_generated",
+    "paletteRevision": 1,
+    "revision": 1
+  },
+  "palette": {
+    "approvalSummary": "User selected the Breath palette.",
+    "colors": [
+      {
+        "hex": "#17151a",
+        "name": "Char",
+        "role": "background"
+      },
+      {
+        "hex": "#efeae2",
+        "name": "Sand",
+        "role": "text"
+      },
+      {
+        "hex": "#d9724e",
+        "name": "Ember",
+        "role": "accent"
+      },
+      {
+        "hex": "#7c7480",
+        "name": "Stone",
+        "role": "support"
+      }
+    ],
+    "gradients": [],
+    "origin": "brandkit_generated",
+    "revision": 1
+  },
+  "version": 3,
+  "visualAxes": {
+    "familiarExperimental": 55,
+    "geometricOrganic": 62,
+    "restrainedExpressive": 32
+  }
+}

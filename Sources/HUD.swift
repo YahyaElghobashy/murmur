@@ -9,7 +9,8 @@ enum T {
     static let fg = Color.primary
     static let muted = Color.primary.opacity(0.55)
     static let faint = Color.primary.opacity(0.35)
-    static let accent = Color(red: 0.42, green: 0.26, blue: 0.65)   // plum, matches the study site
+    static let accent = Color(red: 0.851, green: 0.447, blue: 0.306)  // Ember #D9724E
+    static let sand   = Color(red: 0.937, green: 0.918, blue: 0.886)  // Sand #EFEAE2
     static let good = Color(red: 0.33, green: 0.67, blue: 0.24)
     static let bad = Color(red: 0.85, green: 0.27, blue: 0.29)
     static let warn = Color(red: 0.79, green: 0.54, blue: 0.18)
@@ -53,7 +54,7 @@ private struct Meter: View {
                 let idle = 0.16 + 0.06 * sin(phase * 2 + Double(i) * 0.9)
                 let h = max(3, CGFloat(max(Double(level) * weight, idle)) * 22)
                 Capsule(style: .continuous)
-                    .fill(T.bad)
+                    .fill(T.accent)
                     .frame(width: 2.5, height: h)
                     .animation(.easeOut(duration: 0.07), value: level)
             }

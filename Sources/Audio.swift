@@ -77,7 +77,7 @@ final class Recorder {
         converter = conv
 
         let dir = FileManager.default.temporaryDirectory
-            .appendingPathComponent("whisperbar", isDirectory: true)
+            .appendingPathComponent("murmur", isDirectory: true)
         try? FileManager.default.createDirectory(at: dir, withIntermediateDirectories: true)
         let out = dir.appendingPathComponent("clip-\(UUID().uuidString).wav")
         url = out

@@ -1,0 +1,58 @@
+{
+  "reviews": [
+    {
+      "stage": "palette",
+      "name": "Night Signal",
+      "premise": "Near-black chrome with one precise violet signal, so the mark reads instantly against a dark menu bar and never competes with the system icons beside it.",
+      "keywords": ["precise", "technical", "fast"],
+      "palette": [
+        { "hex": "#0B0B0F", "name": "Ink" },
+        { "hex": "#F4F4F5", "name": "Mist" },
+        { "hex": "#6E56CF", "name": "Signal" },
+        { "hex": "#8B8B94", "name": "Muted" }
+      ],
+      "logo_ideas": [
+        "An M whose three strokes are level-meter bars at different heights",
+        "A single notch cut from a solid square, reading as both a waveform peak and a speech caret"
+      ],
+      "background_color": "#0B0B0F",
+      "text_color": "#F4F4F5"
+    },
+    {
+      "stage": "palette",
+      "name": "Breath",
+      "premise": "Speech is breath before it is data. A warm off-black and sand base with an ember accent, which separates Murmur from every cold blue developer tool on the machine.",
+      "keywords": ["human", "warm", "intimate"],
+      "palette": [
+        { "hex": "#17151A", "name": "Char" },
+        { "hex": "#EFEAE2", "name": "Sand" },
+        { "hex": "#D9724E", "name": "Ember" },
+        { "hex": "#7C7480", "name": "Stone" }
+      ],
+      "logo_ideas": [
+        "An open arc, the shape of an exhale leaving the mouth, closing into a dot",
+        "Two nested crescents, the smaller one offset, reading as a quiet sound travelling"
+      ],
+      "background_color": "#17151A",
+      "text_color": "#EFEAE2"
+    },
+    {
+      "stage": "palette",
+      "name": "Low Tide",
+      "premise": "The most restrained of the three. A desaturated teal on cool slate, built to disappear into any menu bar and stay legible at eighteen pixels in monochrome.",
+      "keywords": ["calm", "restrained", "durable"],
+      "palette": [
+        { "hex": "#0F1417", "name": "Slate" },
+        { "hex": "#F2F4F4", "name": "Fog" },
+        { "hex": "#3E8C84", "name": "Tide" },
+        { "hex": "#77848A", "name": "Ash" }
+      ],
+      "logo_ideas": [
+        "Three concentric arcs of decreasing weight, a sound fading rather than radiating",
+        "A waveform compressed into a single vertical glyph with one taller centre stroke"
+      ],
+      "background_color": "#0F1417",
+      "text_color": "#F2F4F4"
+    }
+  ]
+}

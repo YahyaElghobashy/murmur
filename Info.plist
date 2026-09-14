@@ -2,17 +2,18 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-  <key>CFBundleName</key>                 <string>Whisperbar</string>
-  <key>CFBundleDisplayName</key>          <string>Whisperbar</string>
-  <key>CFBundleExecutable</key>           <string>Whisperbar</string>
-  <key>CFBundleIdentifier</key>           <string>com.yahyaelghobashy.whisperbar</string>
+  <key>CFBundleName</key>                 <string>Murmur</string>
+  <key>CFBundleDisplayName</key>          <string>Murmur</string>
+  <key>CFBundleExecutable</key>           <string>Murmur</string>
+  <key>CFBundleIdentifier</key>           <string>com.yahyaelghobashy.murmur</string>
   <key>CFBundleVersion</key>              <string>1.0.0</string>
   <key>CFBundleShortVersionString</key>   <string>1.0.0</string>
   <key>CFBundlePackageType</key>          <string>APPL</string>
+  <key>CFBundleIconFile</key>             <string>Murmur</string>
   <key>LSMinimumSystemVersion</key>       <string>13.0</string>
   <key>LSUIElement</key>                  <true/>
   <key>NSHighResolutionCapable</key>      <true/>
   <key>NSMicrophoneUsageDescription</key>
-  <string>Whisperbar records your voice only while you hold the dictation key, transcribes it on this Mac, and deletes the audio immediately. Nothing is uploaded.</string>
+  <string>Murmur records your voice only while you hold the dictation key, transcribes it on this Mac, and deletes the audio immediately. Nothing is uploaded.</string>
 </dict>
 </plist>

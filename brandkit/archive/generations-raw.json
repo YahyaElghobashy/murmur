@@ -1,0 +1,642 @@
+[
+  {
+    "created_at": "2026-09-14T12:06:46.081116Z",
+    "display_name": "Recraft V4.1",
+    "id": "982d9b62-315d-461b-aae9-ff1d19f75f9e",
+    "job_type": "recraft_v4_1",
+    "min_result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3DAWGgNqxmPgT1UgXyz74CE1p67/hf_20260914_120646_982d9b62-315d-461b-aae9-ff1d19f75f9e_min.webp",
+    "params": {
+      "aspect_ratio": "1:1",
+      "background_color": "#17151A",
+      "batch_size": 1,
+      "colors": [
+        "#D9724E",
+        "#EFEAE2"
+      ],
+      "height": 1024,
+      "model_type": "vector",
+      "prompt": "Abstract flat vector symbol for a quiet voice-capture utility. One horizontal rounded bar with a single smooth U-shaped notch cut upward into its lower edge and placed off centre, so the removed shape reads at once as a dip in a level meter and as the strip of interface the tool inhabits. Construction is a rectangle with fully rounded end caps, its height about one fifth of its width, the notch a half ellipse roughly one third of the bar's length positioned left of centre, its curve meeting the bar's underside tangentially so no sharp corner is left. Style register is spare, functional and confident, an interface component rather than a decorative badge. Strict two colour use: the locked accent fills the bar, the locked background occupies the notch, with no third colour introduced. Centred, isolated, generous even margin, the silhouette wide and stable and legible when reduced to a small interface glyph. Flat vector design, clean lines, no shadows, no texture, no text. Clean editable vector paths, SVG-friendly, minimal anchor points.",
+      "resolution": "2k",
+      "width": 1024
+    },
+    "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3DAWGgNqxmPgT1UgXyz74CE1p67/hf_20260914_120646_982d9b62-315d-461b-aae9-ff1d19f75f9e.svg",
+    "status": "completed"
+  },
+  {
+    "created_at": "2026-09-14T12:06:21.264723Z",
+    "display_name": "Recraft V4.1",
+    "id": "241d0812-3971-4926-8c3a-59bf1c959ae8",
+    "job_type": "recraft_v4_1",
+    "min_result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3DAWGgNqxmPgT1UgXyz74CE1p67/hf_20260914_120621_241d0812-3971-4926-8c3a-59bf1c959ae8_min.webp",
+    "params": {
+      "aspect_ratio": "1:1",
+      "background_color": "#17151A",
+      "batch_size": 1,
+      "colors": [
+        "#D9724E",
+        "#EFEAE2"
+      ],
+      "height": 1024,
+      "model_type": "vector",
+      "prompt": "Abstract flat vector symbol for a quiet voice-capture utility. One solid circle divided into three crescent slivers of decreasing width by two curved cuts that are offset laterally rather than concentric, so the shapes read as a sound travelling sideways and thinning rather than broadcasting outward in rings. Construction is strictly circular: a single master circle, two arc subtractions sharing the circle's radius but displaced along the horizontal axis, the widest crescent at the left and the narrowest at the right, the gaps between them equal and carrying as much visual weight as the solids. Style register is disciplined, geometric and quietly technical. Strict two colour use: the locked accent fills the crescents, the locked background shows through the cuts, with no third colour introduced. Centred, isolated, generous even margin, mass distributed so the mark holds together when reduced to a small interface glyph. Flat vector design, clean lines, no shadows, no texture, no text. Clean editable vector paths, SVG-friendly, minimal anchor points.",
+      "resolution": "2k",
+      "width": 1024
+    },
+    "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3DAWGgNqxmPgT1UgXyz74CE1p67/hf_20260914_120621_241d0812-3971-4926-8c3a-59bf1c959ae8.svg",
+    "status": "completed"
+  },
+  {
+    "created_at": "2026-09-14T12:05:42.805349Z",
+    "display_name": "Recraft V4.1",
+    "id": "a78c90f6-afff-4bbb-a0f0-3526931024d5",
+    "job_type": "recraft_v4_1",
+    "min_result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3DAWGgNqxmPgT1UgXyz74CE1p67/hf_20260914_120542_a78c90f6-afff-4bbb-a0f0-3526931024d5_min.webp",
+    "params": {
+      "aspect_ratio": "1:1",
+      "background_color": "#17151A",
+      "batch_size": 1,
+      "colors": [
+        "#D9724E",
+        "#EFEAE2"
+      ],
+      "height": 1024,
+      "model_type": "vector",
+      "prompt": "Abstract monoline symbol for a quiet voice-capture utility. One continuous open stroke that curves inward through roughly three quarters of a turn and terminates in a single solid round dot resting inside the curve's own opening, so the enclosed negative space reads as a held breath. Construction is a single arc of constant radius with rounded caps, the dot placed off centre toward the lower right, the whole silhouette circular and balanced with deliberate asymmetry in where the stroke opens. Style register is calm, contemporary and utilitarian, closer to a precise instrument than a friendly consumer badge. Strict two colour use: the locked accent carries the stroke and the dot, the locked background sits behind as a solid field, with no third colour introduced. Centred, isolated, generous even margin, proportioned to stay legible when reduced to a small interface glyph. Monoline vector design, uniform stroke weight, rounded line caps, no fills, no shadows, no texture, no text. Clean editable vector paths, SVG-friendly, minimal anchor points.",
+      "resolution": "2k",
+      "width": 1024
+    },
+    "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3DAWGgNqxmPgT1UgXyz74CE1p67/hf_20260914_120542_a78c90f6-afff-4bbb-a0f0-3526931024d5.svg",
+    "status": "completed"
+  },
+  {
+    "created_at": "2026-09-13T14:54:23.030091Z",
+    "display_name": "GPT Image 2.5",
+    "id": "ea346e47-051a-4113-801a-7245312abbbd",
+    "job_type": "gpt_image_2_5",
+    "min_result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3DAWGgNqxmPgT1UgXyz74CE1p67/hf_20260913_145423_ea346e47-051a-4113-801a-7245312abbbd_min.webp",
+    "params": {
+      "aspect_ratio": "1:1",
+      "background": "transparent",
+      "height": 1024,
+      "medias": [
+        {
+          "data": {
+            "id": "1f8a8999-f7fb-43b7-abae-5da7624c1cd0",
+            "type": "media_input",
+            "url": "https://d2ol7oe51mr4n9.cloudfront.net/user_3DAWGgNqxmPgT1UgXyz74CE1p67/1f8a8999-f7fb-43b7-abae-5da7624c1cd0.png"
+          },
+          "role": "image"
+        },
+        {
+          "data": {
+            "id": "1ebcbf2b-87fe-478e-b3b5-6572e7a122e0",
+            "type": "media_input",
+            "url": "https://d2ol7oe51mr4n9.cloudfront.net/user_3DAWGgNqxmPgT1UgXyz74CE1p67/1ebcbf2b-87fe-478e-b3b5-6572e7a122e0.png"
+          },
+          "role": "image"
+        }
+      ],
+      "model": "flare",
+      "prompt": "Sticker-style mascot logo badge, bold cartoon vector, thick black outlines and a clean white sticker border, fully transparent background. A pixel-art cartoon character head of a smiling man with curly dark hair wearing black VR goggles, peeking over chunky display lettering and gripping the top of the letters with both pixel-art hands. The top word reads exactly YAYA'S - the five letters Y A Y A S with a clear apostrophe punctuation mark between the second A and the S - in huge chunky bold lime-green display letters with heavy black outline and offset drop shadow. Underneath, the word SERVERS in bright yellow graffiti brush script with black outline, overlapping at a jaunty angle. A glossy black coiled ethernet LAN cable with a visible RJ45 connector loops around the head like Saturn's ring. Beside the head, a small cartoon server tower with three glowing green and amber status LEDs. A four-point sparkle star and a yellow star accent. Playful, energetic, clean vector sticker art, high contrast, centered, square. Spelling must be exact: YAYA'S SERVERS.",
+      "quality": "high",
+      "reference_elements": [],
+      "remove_bg": false,
+      "resolution": "1k",
+      "width": 1024
+    },
+    "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3DAWGgNqxmPgT1UgXyz74CE1p67/hf_20260913_145423_ea346e47-051a-4113-801a-7245312abbbd.png",
+    "status": "completed"
+  },
+  {
+    "created_at": "2026-09-13T14:52:26.708205Z",
+    "display_name": "GPT Image 2.5",
+    "id": "a619f5ab-a501-4bc2-a38c-ead1fed9a87c",
+    "job_type": "gpt_image_2_5",
+    "min_result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3DAWGgNqxmPgT1UgXyz74CE1p67/hf_20260913_145226_a619f5ab-a501-4bc2-a38c-ead1fed9a87c_min.webp",
+    "params": {
+      "aspect_ratio": "1:1",
+      "background": "transparent",
+      "height": 1024,
+      "medias": [
+        {
+          "data": {
+            "id": "d2f319f8-6b1a-48bb-a95f-677a894bce88",
+            "type": "media_input",
+            "url": "https://d2ol7oe51mr4n9.cloudfront.net/user_3DAWGgNqxmPgT1UgXyz74CE1p67/d2f319f8-6b1a-48bb-a95f-677a894bce88.png"
+          },
+          "role": "image"
+        },
+        {
+          "data": {
+            "id": "dc875876-9bcd-4431-9cfc-93341d3a0602",
+            "type": "media_input",
+            "url": "https://d2ol7oe51mr4n9.cloudfront.net/user_3DAWGgNqxmPgT1UgXyz74CE1p67/dc875876-9bcd-4431-9cfc-93341d3a0602.png"
+          },
+          "role": "image"
+        }
+      ],
+      "model": "flare",
+      "prompt": "Sticker-style mascot logo badge, bold cartoon vector, thick black outlines and a clean white sticker border, on a fully transparent background. A pixel-art cartoon character head of a smiling man with curly dark hair wearing black VR goggles, peeking up from behind chunky display lettering. The word YAYA'S in huge chunky bold lime-green display letters with heavy black outline and offset black drop shadow. The word SERVERS underneath in bright yellow graffiti brush script with black outline, overlapping the green word at a jaunty angle. A glossy black coiled ethernet LAN cable with a visible RJ45 connector loops around the head like Saturn's ring. To the side, a small friendly cartoon server tower with three glowing green and amber status LEDs. Small four-point sparkle star and a yellow star accent. Playful, energetic, clean vector sticker art, high contrast, centered, square.",
+      "quality": "high",
+      "reference_elements": [],
+      "remove_bg": false,
+      "resolution": "1k",
+      "width": 1024
+    },
+    "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3DAWGgNqxmPgT1UgXyz74CE1p67/hf_20260913_145226_a619f5ab-a501-4bc2-a38c-ead1fed9a87c.png",
+    "status": "completed"
+  },
+  {
+    "created_at": "2026-09-13T14:51:04.538723Z",
+    "display_name": "GPT Image 2.5",
+    "id": "18c7ed20-d121-4dfe-a668-7c74db0e581a",
+    "job_type": "gpt_image_2_5",
+    "min_result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3DAWGgNqxmPgT1UgXyz74CE1p67/hf_20260913_145104_18c7ed20-d121-4dfe-a668-7c74db0e581a_min.webp",
+    "params": {
+      "aspect_ratio": "1:1",
+      "height": 1024,
+      "medias": [
+        {
+          "data": {
+            "id": "8d4c5a9b-90ea-465f-a1eb-14646065baac",
+            "type": "media_input",
+            "url": "https://d2ol7oe51mr4n9.cloudfront.net/user_3DAWGgNqxmPgT1UgXyz74CE1p67/8d4c5a9b-90ea-465f-a1eb-14646065baac.png"
+          },
+          "role": "image"
+        },
+        {
+          "data": {
+            "id": "81f29e43-9406-423a-ba18-067b4818e09a",
+            "type": "media_input",
+            "url": "https://d2ol7oe51mr4n9.cloudfront.net/user_3DAWGgNqxmPgT1UgXyz74CE1p67/81f29e43-9406-423a-ba18-067b4818e09a.png"
+          },
+          "role": "image"
+        }
+      ],
+      "model": "flare",
+      "prompt": "Sticker-style mascot logo badge, bold cartoon vector, thick black outlines, on a soft pastel mint-to-lavender gradient square background. A pixel-art cartoon character head of a smiling man with curly dark hair wearing black VR goggles, peeking up from behind chunky display lettering. The word YAYA'S in huge chunky bold lime-green display letters with heavy black outline and offset black drop shadow. The word SERVERS underneath in bright yellow graffiti brush script with black outline, overlapping the green word at a jaunty angle. A glossy black coiled ethernet LAN cable loops around the head like Saturn's ring. To the side, a small friendly cartoon server tower with three glowing green and amber status LEDs. Small four-point sparkle star and a yellow star accent. Playful, energetic, clean vector sticker art, high contrast, centered, square.",
+      "quality": "high",
+      "reference_elements": [],
+      "remove_bg": false,
+      "resolution": "1k",
+      "width": 1024
+    },
+    "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3DAWGgNqxmPgT1UgXyz74CE1p67/hf_20260913_145104_18c7ed20-d121-4dfe-a668-7c74db0e581a.png",
+    "status": "completed"
+  },
+  {
+    "created_at": "2026-09-06T21:31:52.154911Z",
+    "display_name": "Kling 3.0 Turbo",
+    "id": "2edabc13-999e-49aa-9fc7-56f1681421bb",
+    "job_type": "kling3_0_turbo",
+    "min_result_url": null,
+    "params": {
+      "aspect_ratio": "16:9",
+      "duration": 5,
+      "height": 720,
+      "medias": [],
+      "prompt": "slow abstract drifting light field, soft bokeh gradients, no people, no buildings, no text, ambient motion",
+      "resolution": "720p",
+      "width": 1280
+    },
+    "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3DAWGgNqxmPgT1UgXyz74CE1p67/hf_20260906_213152_2edabc13-999e-49aa-9fc7-56f1681421bb.mp4",
+    "status": "completed",
+    "thumbnail_url": "https://cdn.higgsfield.ai/user_3DAWGgNqxmPgT1UgXyz74CE1p67/hf_20260906_213152_2edabc13-999e-49aa-9fc7-56f1681421bb_thumbnail.webp"
+  },
+  {
+    "created_at": "2026-09-06T21:31:21.654396Z",
+    "display_name": "Z Image",
+    "id": "cdfff922-3dcf-425a-8df8-bec2b09b0011",
+    "job_type": "z_image",
+    "min_result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3DAWGgNqxmPgT1UgXyz74CE1p67/hf_20260906_213121_cdfff922-3dcf-425a-8df8-bec2b09b0011_min.webp",
+    "params": {
+      "aspect_ratio": "1:1",
+      "batch_size": 1,
+      "height": 2048,
+      "prompt": "abstract soft gradient texture field, no text, no people, no buildings",
+      "width": 2048
+    },
+    "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3DAWGgNqxmPgT1UgXyz74CE1p67/hf_20260906_213121_cdfff922-3dcf-425a-8df8-bec2b09b0011.png",
+    "status": "completed"
+  },
+  {
+    "created_at": "2026-09-06T21:30:37.014156Z",
+    "display_name": "Recraft V4.1",
+    "id": "977f45fb-1011-4d40-8a55-d45b032e1bf0",
+    "job_type": "recraft_v4_1",
+    "min_result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3DAWGgNqxmPgT1UgXyz74CE1p67/hf_20260906_213037_977f45fb-1011-4d40-8a55-d45b032e1bf0_min.webp",
+    "params": {
+      "aspect_ratio": "1:1",
+      "background_color": "#f3f0ea",
+      "batch_size": 1,
+      "colors": [
+        "#16323f",
+        "#9c8963"
+      ],
+      "height": 1024,
+      "model_type": "vector",
+      "prompt": "Minimal geometric logo mark for a premium property developer. Two abstract towers with negative space between them. Flat vector, no text, no gradient, centered, generous margin.",
+      "resolution": "1k",
+      "width": 1024
+    },
+    "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3DAWGgNqxmPgT1UgXyz74CE1p67/hf_20260906_213037_977f45fb-1011-4d40-8a55-d45b032e1bf0.svg",
+    "status": "completed"
+  },
+  {
+    "created_at": "2026-08-10T16:25:01.174364Z",
+    "display_name": "Kling v3.0",
+    "id": "7669cd9f-386f-4990-91ed-282eacb5f384",
+    "job_type": "kling3_0",
+    "min_result_url": null,
+    "params": {
+      "aspect_ratio": "9:16",
+      "cfg_scale": 0.5,
+      "duration": 3,
+      "enhance_prompt": false,
+      "height": 1920,
+      "kling_element_ids": [],
+      "kling_elements": [],
+      "medias": [
+        {
+          "data": {
+            "id": "3190da97-9b5c-4b14-a7ff-b78c6a66ef6b",
+            "type": "image_job",
+            "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3DAWGgNqxmPgT1UgXyz74CE1p67/hf_20260810_162337_3190da97-9b5c-4b14-a7ff-b78c6a66ef6b.png"
+          },
+          "role": "start_image"
+        }
+      ],
+      "mode": "pro",
+      "multi_prompt": [],
+      "multi_shot_mode": "custom",
+      "multi_shots": false,
+      "prompt": "Use the provided image as the start frame. Do not change anything that exists in this image. Extreme close-up of the laptop screen glowing with the textless crimson silhouette key art. SUBJECT MOVEMENT: the blurry pink reflection of the balloon bear's head leans closer into the glossy screen, tilting curiously; the smoke curl within the artwork on screen drifts almost imperceptibly. CAMERA: slow push toward the screen, subtle handheld breathing. LIGHTING: maintain base image, screen glow key. ATMOSPHERE: quiet office hum, one soft latex squeak. STYLE: match base image, Portra grain, halation. PACING: slow, curious. Negative: no morphing, no flicker, NO text appearing on the screen, no grade shift, no music, artwork stays crisp.",
+      "reference_elements": [],
+      "sound": "on",
+      "width": 1080
+    },
+    "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3DAWGgNqxmPgT1UgXyz74CE1p67/hf_20260810_162501_7669cd9f-386f-4990-91ed-282eacb5f384.mp4",
+    "status": "completed",
+    "thumbnail_url": "https://cdn.higgsfield.ai/user_3DAWGgNqxmPgT1UgXyz74CE1p67/hf_20260810_162501_7669cd9f-386f-4990-91ed-282eacb5f384_thumbnail.webp"
+  },
+  {
+    "created_at": "2026-08-10T16:25:01.115796Z",
+    "display_name": "Kling v3.0",
+    "id": "8412bb8d-d9f7-49ee-b448-48245bb7da33",
+    "job_type": "kling3_0",
+    "min_result_url": null,
+    "params": {
+      "aspect_ratio": "9:16",
+      "cfg_scale": 0.5,
+      "duration": 7,
+      "enhance_prompt": false,
+      "height": 1920,
+      "kling_element_ids": [],
+      "kling_elements": [],
+      "medias": [
+        {
+          "data": {
+            "id": "6ab280d5-b998-4e61-a401-2812800d25f3",
+            "type": "image_job",
+            "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3DAWGgNqxmPgT1UgXyz74CE1p67/hf_20260810_162337_6ab280d5-b998-4e61-a401-2812800d25f3.png"
+          },
+          "role": "start_image"
+        }
+      ],
+      "mode": "pro",
+      "multi_prompt": [],
+      "multi_shot_mode": "custom",
+      "multi_shots": false,
+      "prompt": "Use the provided image as the start frame. Do not change anything that exists in this image. OTS past the laptop at the glossy pink balloon bear leaning in close, squinting at the screen. SUBJECT MOVEMENT: the bear squints harder, then bursts into a cocky laugh, throws himself back in his chair, waves one paw dismissively, and on his final word swings that paw forward across the lens filling the frame with pink gloss - a foreground swipe wipe. He speaks, young cocky playful male voice, Gen Z smirk: \"Red. A hat. A cigarette. Naaah... too old-fashioned. We'll hit you up later, grandpa.\" CAMERA: locked OTS, then the paw swipe blacks the lens at the end. LIGHTING: maintain base image warm lamp. ATMOSPHERE: latex squeaks, office tone. STYLE: match base image. PACING: dialogue at second zero, swipe on the last word. Negative: no morphing, no flicker, no identity change, no extra limbs, no readable text, no grade shift, no music.",
+      "reference_elements": [],
+      "sound": "on",
+      "width": 1080
+    },
+    "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3DAWGgNqxmPgT1UgXyz74CE1p67/hf_20260810_162501_8412bb8d-d9f7-49ee-b448-48245bb7da33.mp4",
+    "status": "completed",
+    "thumbnail_url": "https://cdn.higgsfield.ai/user_3DAWGgNqxmPgT1UgXyz74CE1p67/hf_20260810_162501_8412bb8d-d9f7-49ee-b448-48245bb7da33_thumbnail.webp"
+  },
+  {
+    "created_at": "2026-08-10T16:23:37.876994Z",
+    "display_name": "Nano Banana Pro",
+    "id": "3190da97-9b5c-4b14-a7ff-b78c6a66ef6b",
+    "job_type": "nano_banana_pro",
+    "min_result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3DAWGgNqxmPgT1UgXyz74CE1p67/hf_20260810_162337_3190da97-9b5c-4b14-a7ff-b78c6a66ef6b_min.webp",
+    "params": {
+      "application": null,
+      "aspect_ratio": "9:16",
+      "batch_size": 1,
+      "height": 2752,
+      "input_image": null,
+      "input_images": [
+        {
+          "id": "5e9d89f6-e335-4291-a2d9-5cd219559dea",
+          "type": "image_job",
+          "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3DAWGgNqxmPgT1UgXyz74CE1p67/hf_20260810_132135_5e9d89f6-e335-4291-a2d9-5cd219559dea.png"
+        },
+        {
+          "id": "075223a8-246b-4dec-807e-0bdb19dafabc",
+          "type": "image_job",
+          "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3DAWGgNqxmPgT1UgXyz74CE1p67/hf_20260810_124203_075223a8-246b-4dec-807e-0bdb19dafabc.png"
+        }
+      ],
+      "prompt": "Recreate the first reference image exactly - the extreme close-up of the open silver laptop screen in the dark warm office, faint pink balloon-bear reflection leaning in from the right, screen glow as key light, desk bokeh - but REPLACE what is displayed on the laptop screen: it now shows the artwork of the second reference image as a clean TEXTLESS poster - deep crimson field, black ink silhouette man in a fedora seated in his armchair, one elegant white smoke curl, rotary phone side table - NO words, NO typography, NO letters anywhere on the screen, pure key art. The poster art fills the screen crisp and glowing. LIGHTING: screen glow key, warm lamp rim far behind. CAMERA: macro close-up, 85mm, f/2.0, focus on the artwork on screen. FILM: Kodak Portra 400, fine grain, slight halation on the glow, dust on the screen glass. Vertical 9:16.",
+      "resolution": "2k",
+      "surface": null,
+      "width": 1536
+    },
+    "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3DAWGgNqxmPgT1UgXyz74CE1p67/hf_20260810_162337_3190da97-9b5c-4b14-a7ff-b78c6a66ef6b.png",
+    "status": "completed"
+  },
+  {
+    "created_at": "2026-08-10T16:23:37.768391Z",
+    "display_name": "Nano Banana Pro",
+    "id": "6ab280d5-b998-4e61-a401-2812800d25f3",
+    "job_type": "nano_banana_pro",
+    "min_result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3DAWGgNqxmPgT1UgXyz74CE1p67/hf_20260810_162337_6ab280d5-b998-4e61-a401-2812800d25f3_min.webp",
+    "params": {
+      "application": null,
+      "aspect_ratio": "9:16",
+      "batch_size": 1,
+      "height": 2752,
+      "input_image": null,
+      "input_images": [
+        {
+          "id": "34d5563a-29e6-410e-84e9-5257bffc4e3c",
+          "type": "image_job",
+          "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3DAWGgNqxmPgT1UgXyz74CE1p67/hf_20260810_132135_34d5563a-29e6-410e-84e9-5257bffc4e3c.png"
+        },
+        {
+          "id": "075223a8-246b-4dec-807e-0bdb19dafabc",
+          "type": "image_job",
+          "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3DAWGgNqxmPgT1UgXyz74CE1p67/hf_20260810_124203_075223a8-246b-4dec-807e-0bdb19dafabc.png"
+        }
+      ],
+      "prompt": "Recreate the first reference image exactly - the over-the-shoulder shot from behind the open laptop looking at the glossy pink balloon teddy bear leaning forward into frame, paws on the desk, sharp face inches from the screen, squinting skeptically, warm brass lamp camera-left, color swatches and pen on the desk, screen glow underlighting his face - with one change: the laptop screen's back faces camera, and any visible screen edge glow suggests the crimson artwork of the second reference image (textless crimson key art with the black fedora silhouette). NO readable text anywhere in the frame. LIGHTING: warm lamp key camera-left, screen glow underlight. CAMERA: OTS medium close-up, 50mm, f/2.8, focus on the bear's face. FILM: Kodak Portra 400, fine grain, subtle vignette, fingerprint smudge on the balloon gloss. Vertical 9:16.",
+      "resolution": "2k",
+      "surface": null,
+      "width": 1536
+    },
+    "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3DAWGgNqxmPgT1UgXyz74CE1p67/hf_20260810_162337_6ab280d5-b998-4e61-a401-2812800d25f3.png",
+    "status": "completed"
+  },
+  {
+    "created_at": "2026-08-10T16:09:44.579894Z",
+    "display_name": "Kling v3.0",
+    "id": "f51d2a93-9292-4caf-8048-0835a5c65b88",
+    "job_type": "kling3_0",
+    "min_result_url": null,
+    "params": {
+      "aspect_ratio": "9:16",
+      "cfg_scale": 0.5,
+      "duration": 7,
+      "enhance_prompt": false,
+      "height": 1920,
+      "kling_element_ids": [],
+      "kling_elements": [],
+      "medias": [
+        {
+          "data": {
+            "id": "0262bfc6-3f2d-45af-8212-0c3dd180f641",
+            "type": "media_input",
+            "url": "https://d2ol7oe51mr4n9.cloudfront.net/user_3DAWGgNqxmPgT1UgXyz74CE1p67/0262bfc6-3f2d-45af-8212-0c3dd180f641.png"
+          },
+          "role": "start_image"
+        }
+      ],
+      "mode": "pro",
+      "multi_prompt": [],
+      "multi_shot_mode": "custom",
+      "multi_shots": false,
+      "prompt": "Use the provided image as the start frame. Do not change anything that exists in this image - it is the final frame of the previous shot: the chaos-flooded split office, the flat matte black 2D ink cutout man now STANDING, the pink balloon bear on his chair. SUBJECT MOVEMENT: continuous front-loaded action - the flat man walks forward INTO the thickest chaos, unhurried strides, and exhales an enormous rolling volumetric wave of white smoke that crashes over the clip-art garbage like a tide; wherever it passes, walls and furniture re-form as clean matte cream paper ruled with a fine crimson grid. The bear launches off his chair, bounces once on the desk and SLAMS both paws into a wall grid cell stamping a burst of glossy magenta - lands, bounces, slams a second cell. The last smiley face shrinks into a corner and POPS out of existence. No dialogue - only the bear's one joyful battle squeak and the smoke roar. CAMERA: handheld action coverage reacting LATE - jolt on each slam, whip reframe to the advancing smoke wall, raw operator wobble, no cuts. LIGHTING: chaos strobing dies zone by zone into calm warm matte. ATMOSPHERE: ocean-like smoke roar, chaos screech silencing to paper-quiet where cleaned, deep soft thumps on the slams, final cork-pop. STYLE: match base image - four textures distinct: matte flat man, volumetric smoke, glossy bear, litho cream. PACING: relentless, ends settled on the cleaned room breathing. Negative: the flat man never rushes and never gains features or gloss, chaos never wins ground back, no readable words, no logos, no morphing of characters, no music.",
+      "reference_elements": [],
+      "sound": "on",
+      "width": 1080
+    },
+    "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3DAWGgNqxmPgT1UgXyz74CE1p67/hf_20260810_160944_f51d2a93-9292-4caf-8048-0835a5c65b88.mp4",
+    "status": "completed",
+    "thumbnail_url": "https://cdn.higgsfield.ai/user_3DAWGgNqxmPgT1UgXyz74CE1p67/hf_20260810_160944_f51d2a93-9292-4caf-8048-0835a5c65b88_thumbnail.webp"
+  },
+  {
+    "created_at": "2026-08-10T16:05:35.318064Z",
+    "display_name": "Kling v3.0",
+    "id": "99ed1c2d-5354-41a5-a8cb-f014ab3ca5da",
+    "job_type": "kling3_0",
+    "min_result_url": null,
+    "params": {
+      "aspect_ratio": "9:16",
+      "cfg_scale": 0.5,
+      "duration": 6,
+      "enhance_prompt": false,
+      "height": 1920,
+      "kling_element_ids": [],
+      "kling_elements": [],
+      "medias": [
+        {
+          "data": {
+            "id": "d5c90f3d-935c-4302-8a5b-d2e68ab6f2a0",
+            "type": "media_input",
+            "url": "https://d2ol7oe51mr4n9.cloudfront.net/user_3DAWGgNqxmPgT1UgXyz74CE1p67/d5c90f3d-935c-4302-8a5b-d2e68ab6f2a0.png"
+          },
+          "role": "start_image"
+        }
+      ],
+      "mode": "pro",
+      "multi_prompt": [],
+      "multi_shot_mode": "custom",
+      "multi_shots": false,
+      "prompt": "Use the provided image as the start frame. Do not change anything that exists in this image - it is the final frame of the previous shot: the split office flooded with erupting clip-art chaos from the burst monitor, the pink balloon bear fallen back on his chair, the flat matte black 2D ink cutout man seated calm in the flat crimson chair. SUBJECT MOVEMENT: the chaos keeps raining; the bear scrambles upright on his chair and yells over the noise; then the flat man STANDS UP from his chair for the first time - slow, deliberate, unhurried - straightens his flat lapel with one flat hand, his volumetric smoke rising straight and strong. The chaos recoils slightly from him as he rises. Dialogue - bear, alarmed, shouting over static: \"Okay, old man - got taste for THIS?!\" (beat) the deep calm mature voice, quiet but cutting through everything, close-mic: \"Watch closely. This is the interview.\" CAMERA: low wide holds, then a slow push toward the flat man as he rises, handheld tremor stilling as he stands. LIGHTING: chaos glow strobing, a calm warm pocket forming around the flat man. ATMOSPHERE: glitch static ducking under his line, deflation hisses. STYLE: match base image - chaos cheap and oversaturated, flat man zero features zero gloss always. PACING: chaos frantic, his rise slow and monumental. Negative: the flat man never gains features or gloss, chaos never touches either character, no readable words, no logos, no morphing of characters, no music.",
+      "reference_elements": [],
+      "sound": "on",
+      "width": 1080
+    },
+    "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3DAWGgNqxmPgT1UgXyz74CE1p67/hf_20260810_160535_99ed1c2d-5354-41a5-a8cb-f014ab3ca5da.mp4",
+    "status": "completed",
+    "thumbnail_url": "https://cdn.higgsfield.ai/user_3DAWGgNqxmPgT1UgXyz74CE1p67/hf_20260810_160535_99ed1c2d-5354-41a5-a8cb-f014ab3ca5da_thumbnail.webp"
+  },
+  {
+    "created_at": "2026-08-10T16:05:35.284109Z",
+    "display_name": "Kling v3.0",
+    "id": "4585ed25-f083-4415-8a3b-aa05828d5558",
+    "job_type": "kling3_0",
+    "min_result_url": null,
+    "params": {
+      "aspect_ratio": "9:16",
+      "cfg_scale": 0.5,
+      "duration": 5,
+      "enhance_prompt": false,
+      "height": 1920,
+      "kling_element_ids": [],
+      "kling_elements": [],
+      "medias": [
+        {
+          "data": {
+            "id": "5f207b22-aee2-4554-80db-d4b353a6746b",
+            "type": "media_input",
+            "url": "https://d2ol7oe51mr4n9.cloudfront.net/user_3DAWGgNqxmPgT1UgXyz74CE1p67/5f207b22-aee2-4554-80db-d4b353a6746b.png"
+          },
+          "role": "start_image"
+        }
+      ],
+      "mode": "pro",
+      "multi_prompt": [],
+      "multi_shot_mode": "custom",
+      "multi_shots": false,
+      "prompt": "Use the provided image as the start frame. Do not change anything that exists in this image - it is the final frame of the previous shot: the dusk office, door closed background-left, the pink balloon bear frozen at his desk staring at the door. SUBJECT MOVEMENT: the door SWINGS OPEN SLOWLY by itself on the echo of the knock - and standing in the doorway, perfectly still, is a PERFECTLY FLAT matte black 2D ink cutout man: fedora, suit silhouette, cigarette in hand, zero gloss, zero facial features, razor-sharp edges, a living paper cutout against the hallway light; ONLY his cigarette smoke is real volumetric white 3D smoke curling up past the door frame. He does not move for a long beat. The bear slowly lowers the paper he was holding. Dialogue - bear, young cocky voice dropping to half-whisper: \"...We said applicants with taste. You brought a hat.\" CAMERA: the master wide holds completely static - the door opening owns the frame. LIGHTING: maintain exactly; cooler hallway light spills through the open door; the flat man untouched by any light. ATMOSPHERE: slow door hinge creak, room tone dead quiet, one soft jazz brush after the line. STYLE: match base image exactly, Portra grain. PACING: slow dread then deadpan. Negative: the flat man never gains features gloss or depth, he does not walk yet, no morphing, no flicker, no readable text, no grade shift, no music.",
+      "reference_elements": [],
+      "sound": "on",
+      "width": 1080
+    },
+    "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3DAWGgNqxmPgT1UgXyz74CE1p67/hf_20260810_160535_4585ed25-f083-4415-8a3b-aa05828d5558.mp4",
+    "status": "completed",
+    "thumbnail_url": "https://cdn.higgsfield.ai/user_3DAWGgNqxmPgT1UgXyz74CE1p67/hf_20260810_160535_4585ed25-f083-4415-8a3b-aa05828d5558_thumbnail.webp"
+  },
+  {
+    "created_at": "2026-08-10T15:58:50.192335Z",
+    "display_name": "Kling v3.0",
+    "id": "4b5b7490-a220-4087-a1b9-9d4636b5a743",
+    "job_type": "kling3_0",
+    "min_result_url": null,
+    "params": {
+      "aspect_ratio": "9:16",
+      "cfg_scale": 0.5,
+      "duration": 6,
+      "enhance_prompt": false,
+      "height": 1920,
+      "kling_element_ids": [],
+      "kling_elements": [],
+      "medias": [
+        {
+          "data": {
+            "id": "3687eab5-6472-4e36-930b-4b097cac377c",
+            "type": "image_job",
+            "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3DAWGgNqxmPgT1UgXyz74CE1p67/hf_20260810_124455_3687eab5-6472-4e36-930b-4b097cac377c.png"
+          },
+          "role": "start_image"
+        }
+      ],
+      "mode": "pro",
+      "multi_prompt": [],
+      "multi_shot_mode": "custom",
+      "multi_shots": false,
+      "prompt": "Use the provided image as the start frame. Do not change anything that exists in this image. The final combined poster: crimson field, flat ink silhouette man seated with cigarette, glossy pink balloon bear leaning on the armchair, smoke curl ending in a balloon knot. SUBJECT MOVEMENT: nearly still, monumental - the smoke drifts, a gloss glint crawls across the bear, the man raises his cigarette a few centimeters in a slow salute. The deep calm voice alone, quiet, close-mic, (short breath) midway: \"Four years of engineering taught me structure. Marketing taught me taste. You just watched the interview.\" CAMERA: extremely slow pull back, perfectly centered, no shake. ATMOSPHERE: vinyl crackle, then silence under the final words. STYLE: match base image, litho grain field, gloss only on the bear. PACING: still throughout, line lands from second one point five. Negative: no morphing, no flicker, no new elements, no text appearing, no grade shift, no music, figures never leave the poster.",
+      "reference_elements": [],
+      "sound": "on",
+      "width": 1080
+    },
+    "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3DAWGgNqxmPgT1UgXyz74CE1p67/hf_20260810_155850_4b5b7490-a220-4087-a1b9-9d4636b5a743.mp4",
+    "status": "completed",
+    "thumbnail_url": "https://cdn.higgsfield.ai/user_3DAWGgNqxmPgT1UgXyz74CE1p67/hf_20260810_155850_4b5b7490-a220-4087-a1b9-9d4636b5a743_thumbnail.webp"
+  },
+  {
+    "created_at": "2026-08-10T15:58:50.191744Z",
+    "display_name": "Kling v3.0",
+    "id": "1375eac3-bcc6-4f1d-8576-35b970f71369",
+    "job_type": "kling3_0",
+    "min_result_url": null,
+    "params": {
+      "aspect_ratio": "9:16",
+      "cfg_scale": 0.5,
+      "duration": 7,
+      "enhance_prompt": false,
+      "height": 1920,
+      "kling_element_ids": [],
+      "kling_elements": [],
+      "medias": [
+        {
+          "data": {
+            "id": "fa06bfdb-3b23-4a9d-ad04-6c317e8c84bf",
+            "type": "image_job",
+            "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3DAWGgNqxmPgT1UgXyz74CE1p67/hf_20260810_155252_fa06bfdb-3b23-4a9d-ad04-6c317e8c84bf.png"
+          },
+          "role": "start_image"
+        }
+      ],
+      "mode": "pro",
+      "multi_prompt": [],
+      "multi_shot_mode": "custom",
+      "multi_shots": false,
+      "prompt": "Use the provided image as the start frame. Do not change anything that exists in this image. The reformed office in the master wide: crimson matte walls with cream grid, swatch grid on the desk, glossy pink accents, the bear standing holding up a blank resume with both paws, the flat ink cutout man standing at the open door background-left, mid-turn, volumetric smoke curling. SUBJECT MOVEMENT: the bear waves the resume hopefully, bouncing on his toes with puppy energy; the flat man pauses in the doorway, takes one last slow drag, his smoke drawing an elegant arc, his flat head turned back toward the bear. Dialogue - bear, suddenly sweet, sales voice: \"Sooo... when can you start?\" (beat) the deep calm mature voice, dry, amused: \"Organized chaos...\" bear, instantly, delighted, arms wide: \"...professionally delivered!\" CAMERA: slow elegant arc from the master position ending centered between them. LIGHTING: maintain - warm settled lamp, matte walls, gloss only on bear and accents. ATMOSPHERE: soft room warmth, one warm jazz brush ride, the door hinge creaks gently. STYLE: match base image, combined matte-gloss system. PACING: warm punchline rhythm, then a settled beat on the two of them. Negative: no readable text on the resume, the flat man never gains features, no morphing, no flicker, no grade shift, no music.",
+      "reference_elements": [],
+      "sound": "on",
+      "width": 1080
+    },
+    "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3DAWGgNqxmPgT1UgXyz74CE1p67/hf_20260810_155850_1375eac3-bcc6-4f1d-8576-35b970f71369.mp4",
+    "status": "completed",
+    "thumbnail_url": "https://cdn.higgsfield.ai/user_3DAWGgNqxmPgT1UgXyz74CE1p67/hf_20260810_155850_1375eac3-bcc6-4f1d-8576-35b970f71369_thumbnail.webp"
+  },
+  {
+    "created_at": "2026-08-10T15:58:50.182112Z",
+    "display_name": "Kling v3.0",
+    "id": "1398428b-0106-4c72-8e95-3c45e3440c44",
+    "job_type": "kling3_0",
+    "min_result_url": null,
+    "params": {
+      "aspect_ratio": "9:16",
+      "cfg_scale": 0.5,
+      "duration": 6,
+      "enhance_prompt": false,
+      "height": 1920,
+      "kling_element_ids": [],
+      "kling_elements": [],
+      "medias": [
+        {
+          "data": {
+            "id": "55243521-bc35-4946-9da6-b1ba7fb98c47",
+            "type": "image_job",
+            "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3DAWGgNqxmPgT1UgXyz74CE1p67/hf_20260810_155252_55243521-bc35-4946-9da6-b1ba7fb98c47.png"
+          },
+          "role": "start_image"
+        }
+      ],
+      "mode": "pro",
+      "multi_prompt": [],
+      "multi_shot_mode": "custom",
+      "multi_shots": false,
+      "prompt": "Use the provided image as the start frame. Do not change anything that exists in this image. Top-down insert on the desk: blank resumes left, scattered swatches center, brass lamp right, a clipboard held by a glossy pink paw tapping a pen, a low tide of white volumetric smoke just arriving from the left edge. SUBJECT MOVEMENT: front-loaded - the pen taps twice; then the smoke tide advances slowly across the desktop and the transformation line moves with it: each scattered swatch it passes SNAPS into a perfectly aligned flat grid of cream and crimson rectangles, one by one; the crumpled papers smooth flat; the pen the paw dropped rolls and flattens into a drawn ink line. The pink paw pulls the clipboard back from the advancing edge. Dialogue - bear, mock-professional interviewer tone, skeptical: \"It says here you have taste. Prove it. One take.\" CAMERA: locked top-down, letting the sweep own the frame. LIGHTING: warm lamp pool, matte where the smoke has passed. ATMOSPHERE: soft paper-snap on each aligned swatch, low smoke hiss, one jazz brush. STYLE: match base image, gloss vs matte litho split. PACING: hypnotic, one snap per beat, dialogue at second zero. Negative: no morphing beyond intended transformations, no flicker, no readable text, the smoke never covers the whole desk, no grade shift elsewhere, no music.",
+      "reference_elements": [],
+      "sound": "on",
+      "width": 1080
+    },
+    "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3DAWGgNqxmPgT1UgXyz74CE1p67/hf_20260810_155850_1398428b-0106-4c72-8e95-3c45e3440c44.mp4",
+    "status": "completed",
+    "thumbnail_url": "https://cdn.higgsfield.ai/user_3DAWGgNqxmPgT1UgXyz74CE1p67/hf_20260810_155850_1398428b-0106-4c72-8e95-3c45e3440c44_thumbnail.webp"
+  },
+  {
+    "created_at": "2026-08-10T15:58:50.165034Z",
+    "display_name": "Kling v3.0",
+    "id": "60f52788-84d8-40f7-8a0e-5fbc1d240e4b",
+    "job_type": "kling3_0",
+    "min_result_url": null,
+    "params": {
+      "aspect_ratio": "9:16",
+      "cfg_scale": 0.5,
+      "duration": 4,
+      "enhance_prompt": false,
+      "height": 1920,
+      "kling_element_ids": [],
+      "kling_elements": [],
+      "medias": [
+        {
+          "data": {
+            "id": "29091fd4-e8e4-459e-8c7a-59e9075fb4c0",
+            "type": "image_job",
+            "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3DAWGgNqxmPgT1UgXyz74CE1p67/hf_20260810_155252_29091fd4-e8e4-459e-8c7a-59e9075fb4c0.png"
+          },
+          "role": "start_image"
+        }
+      ],
+      "mode": "pro",
+      "multi_prompt": [],
+      "multi_shot_mode": "custom",
+      "multi_shots": false,
+      "prompt": "Use the provided image as the start frame. Do not change anything that exists in this image. OTS past the bear's glossy shoulder: the flat matte black 2D ink cutout man seated in the flat crimson ink armchair, real volumetric smoke rising in one curl. SUBJECT MOVEMENT: nearly still - the flat man lifts his flat cigarette hand a few centimeters, the smoke curl thickens and drifts toward the desk; his flat head tilts up just slightly toward the bear. He speaks - deep, calm, unhurried mature male voice, slow 1960s gravitas, slight rasp, close-mic, quiet: \"Taste is what's left... when the noise stops.\" CAMERA: extremely slow push past the bear's shoulder toward the flat man. LIGHTING: maintain exactly. ATMOSPHERE: vinyl-crackle quiet, one distant clock tick. STYLE: match base image - flat matte cutout, zero features, photoreal room. PACING: still and heavy, the line lands mid-shot. Negative: the flat man never gains features or gloss, no morphing, no flicker, no readable text, no grade shift, no music.",
+      "reference_elements": [],
+      "sound": "on",
+      "width": 1080
+    },
+    "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3DAWGgNqxmPgT1UgXyz74CE1p67/hf_20260810_155850_60f52788-84d8-40f7-8a0e-5fbc1d240e4b.mp4",
+    "status": "completed",
+    "thumbnail_url": "https://cdn.higgsfield.ai/user_3DAWGgNqxmPgT1UgXyz74CE1p67/hf_20260810_155850_60f52788-84d8-40f7-8a0e-5fbc1d240e4b_thumbnail.webp"
+  }
+]

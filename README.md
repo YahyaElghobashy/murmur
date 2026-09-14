@@ -1,4 +1,4 @@
-# Whisperbar
+# Murmur
 
 Push-to-talk dictation for macOS. Hold a key, speak, release. The transcript lands
 where your cursor is. Everything runs on this Mac; the audio is deleted the moment
@@ -34,7 +34,7 @@ Needs only the Command Line Tools. No Xcode project, no dependencies.
 
 ```bash
 ./build.sh
-cp -R build/Whisperbar.app /Applications/
+cp -R build/Murmur.app /Applications/
 ```
 
 Requires `whisper-cli` on the path (`brew install whisper-cpp`) and the model at
@@ -47,7 +47,7 @@ Requires `whisper-cli` on the path (`brew install whisper-cpp`) and the model at
   walks you to the right settings pane if it is missing.
 
 Rebuilding the binary can invalidate the Accessibility grant, since the app is ad-hoc
-signed. If the hotkey stops working after a rebuild, remove Whisperbar from the
+signed. If the hotkey stops working after a rebuild, remove Murmur from the
 Accessibility list and add it again.
 
 ## Safety rails

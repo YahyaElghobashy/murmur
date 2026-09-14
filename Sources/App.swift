@@ -5,10 +5,13 @@ import ServiceManagement
 import SwiftUI
 
 @main
-struct Whisperbar {
+struct Murmur {
+    /// NSApplication.delegate is weak. Held here so ARC cannot free it the
+    /// instant it is assigned, which would silently skip every launch callback.
+    static let delegate = AppDelegate()
+
     static func main() {
         let app = NSApplication.shared
-        let delegate = AppDelegate()
         app.delegate = delegate
         app.setActivationPolicy(.accessory)      // menu bar only, no Dock icon
         app.run()
@@ -31,6 +34,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     // MARK: Launch
 
     func applicationDidFinishLaunching(_ note: Notification) {
+        Diag.log("launch: ax=\(Permissions.accessibility) whisper=\(Paths.whisper ?? "nil") model=\(Paths.modelExists)")
         buildStatusItem()
         wireHotkey()
 
@@ -49,8 +53,10 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
             self?.hotkey.reenableIfNeeded()
         }
 
-        Recorder.requestMic { _ in }
-        if !startHotkeyIfPermitted() { presentFirstRun() }
+        Recorder.requestMic { ok in Diag.log("mic granted=\(ok)") }
+        let armed = startHotkeyIfPermitted()
+        Diag.log("hotkey armed=\(armed) statusButton=\(self.statusItem?.button != nil)")
+        if !armed { presentFirstRun() }
     }
 
     func applicationWillTerminate(_ note: Notification) {
@@ -66,43 +72,35 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         return hotkey.start()
     }
 
+    /// Non-blocking. A modal alert from a menu-bar app freezes the main thread, which
+    /// also stops the status item from drawing, so the onboarding runs entirely through
+    /// the HUD, the menu, and a poll that arms the hotkey the moment the switch flips.
     private func presentFirstRun() {
-        let a = NSAlert()
-        a.messageText = "Whisperbar needs Accessibility access"
-        a.informativeText = """
-        It uses it for two things: noticing when you hold ⌃⌥/, and pasting the transcript into \
-        whatever you are typing in.
-
-        Open Privacy & Security → Accessibility, switch Whisperbar on, then choose Retry.
-        """
-        a.addButton(withTitle: "Open Settings")
-        a.addButton(withTitle: "Retry")
-        a.addButton(withTitle: "Later")
-        NSApp.activate(ignoringOtherApps: true)
-        switch a.runModal() {
-        case .alertFirstButtonReturn:
-            Permissions.requestAccessibility()
-            Permissions.openAccessibilitySettings()
-            pollForPermission()
-        case .alertSecondButtonReturn:
-            if !startHotkeyIfPermitted() { presentFirstRun() }
-        default: break
-        }
+        Diag.log("not armed; opening Accessibility settings")
+        rebuildMenu()
+        flash(.failed("Turn Murmur on in Accessibility"), for: 4.5)
+        Permissions.requestAccessibility()          // puts the app in the list
+        Permissions.openAccessibilitySettings()
+        pollForPermission()
     }
 
     /// Granting Accessibility does not notify us, so poll briefly after sending them to Settings.
     private func pollForPermission() {
         var tries = 0
-        Timer.scheduledTimer(withTimeInterval: 1.5, repeats: true) { [weak self] t in
+        let t = Timer(timeInterval: 1.5, repeats: true) { [weak self] t in
             guard let self else { t.invalidate(); return }
             tries += 1
             if self.startHotkeyIfPermitted() {
                 t.invalidate()
+                if let w = NSApp.modalWindow { NSApp.abortModal(); w.orderOut(nil) }
+                self.rebuildMenu()
                 self.flash(.warning("Hotkey armed"), for: 1.4)
             } else if tries > 40 {
                 t.invalidate()
             }
         }
+        // .common so it keeps firing while the permission alert is modal.
+        RunLoop.main.add(t, forMode: .common)
     }
 
     // MARK: Hotkey wiring
@@ -255,26 +253,47 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 
     private func buildStatusItem() {
         statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
+        statusItem.isVisible = true
+        statusItem.behavior = []            // never let the user accidentally drag it away
         refreshStatusIcon()
         rebuildMenu()
+        NSLog("[murmur] status item built; button=%@ visible=%d",
+              statusItem.button == nil ? "nil" : "ok", statusItem.isVisible ? 1 : 0)
     }
+
+    /// The brand glyph, template-rendered so it follows the menu bar in light and dark.
+    /// State is carried by tint, falling back to an SF Symbol if the asset is ever missing.
+    private static let glyph: NSImage? = {
+        guard let url = Bundle.main.url(forResource: "MenuGlyph", withExtension: "png"),
+              let img = NSImage(contentsOf: url) else { return nil }
+        img.size = NSSize(width: 22, height: 11)      // points, not pixels
+        img.isTemplate = true
+        return img
+    }()
 
     private func refreshStatusIcon() {
         guard let button = statusItem?.button else { return }
-        let name: String
+
         var tint: NSColor? = nil
         switch state.phase {
-        case .recording:    name = "waveform.circle.fill"; tint = .systemRed
-        case .transcribing: name = "ellipsis.circle";      tint = .systemPurple
-        case .done:         name = "checkmark.circle";     tint = .systemGreen
-        case .failed:       name = "exclamationmark.circle"; tint = .systemRed
-        default:            name = "mic"
+        case .recording:    tint = NSColor(srgbRed: 0.851, green: 0.447, blue: 0.306, alpha: 1)  // Ember
+        case .transcribing: tint = NSColor(srgbRed: 0.486, green: 0.455, blue: 0.502, alpha: 1)  // Stone
+        case .done:         tint = NSColor.systemGreen
+        case .failed:       tint = NSColor.systemRed
+        default:            tint = nil                                                           // follows the bar
         }
-        let img = NSImage(systemSymbolName: name, accessibilityDescription: "Whisperbar")
-        img?.isTemplate = (tint == nil)
-        button.image = img
+
+        if let g = AppDelegate.glyph {
+            button.image = g
+        } else {
+            let img = NSImage(systemSymbolName: "mic", accessibilityDescription: "Murmur")
+            img?.isTemplate = true
+            button.image = img
+        }
+        button.imagePosition = .imageOnly
+        button.title = ""
         button.contentTintColor = tint
-        button.toolTip = "Whisperbar · \(state.lang.long)\nHold ⌃⌥/ to dictate"
+        button.toolTip = "Murmur · \(state.lang.long)\nHold ⌃⌥/ to dictate"
         rebuildMenu()
     }
 
@@ -330,7 +349,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
             w.isEnabled = false; m.addItem(w)
         }
         m.addItem(.separator())
-        m.addItem(NSMenuItem(title: "Quit Whisperbar", action: #selector(NSApplication.terminate(_:)), keyEquivalent: "q"))
+        m.addItem(NSMenuItem(title: "Quit Murmur", action: #selector(NSApplication.terminate(_:)), keyEquivalent: "q"))
         statusItem.menu = m
     }
 
