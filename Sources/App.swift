@@ -172,9 +172,13 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
             hud.setInteractive(true)
             hud.show()
             Sound.tick()
-        case .idle:
+        case .transcribing:
+            break
+        default:
+            // idle, or the too-short flash the first tap of a double-tap just
+            // caused. Treating that flash as idle is what makes a fast
+            // double-tap actually lock instead of dying in the warning state.
             beginRecording(locked: true)
-        default: break
         }
     }
 
@@ -326,69 +330,98 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         rebuildMenu()
     }
 
+    private func item(_ title: String, symbol: String? = nil, action: Selector? = nil,
+                      key: String = "", checked: Bool = false, enabled: Bool = true) -> NSMenuItem {
+        let it = NSMenuItem(title: title, action: action, keyEquivalent: key)
+        it.target = action == nil ? nil : self
+        it.isEnabled = enabled
+        it.state = checked ? .on : .off
+        if let symbol, let img = NSImage(systemSymbolName: symbol, accessibilityDescription: nil) {
+            img.isTemplate = true
+            it.image = img
+        }
+        return it
+    }
+
     private func rebuildMenu() {
         let m = NSMenu()
+        m.autoenablesItems = false
 
-        let status = NSMenuItem(title: hotkey.running ? "Ready · hold ⌃⌥/" : "Not armed — grant Accessibility",
-                                action: hotkey.running ? nil : #selector(fixPermissions), keyEquivalent: "")
-        status.target = self
-        status.isEnabled = !hotkey.running
-        m.addItem(status)
-        m.addItem(.separator())
-
-        let langHeader = NSMenuItem(title: "Primary language  ⌃⌥.", action: nil, keyEquivalent: "")
-        langHeader.isEnabled = false
-        m.addItem(langHeader)
-        for l in Lang.allCases {
-            let it = NSMenuItem(title: "   \(l.long)", action: #selector(pickLang(_:)), keyEquivalent: "")
-            it.target = self
-            it.representedObject = l.rawValue
-            it.state = (l == state.lang) ? .on : .off
-            m.addItem(it)
+        // Header: name in bold with the live state under it.
+        let ready = hotkey.running
+        let head = NSMenuItem()
+        head.isEnabled = false
+        let title = NSMutableAttributedString(
+            string: "Murmur\n",
+            attributes: [.font: NSFont.boldSystemFont(ofSize: 13)])
+        title.append(NSAttributedString(
+            string: ready ? "Ready · hold ⌃⌥/ to dictate" : "Not armed — grant Accessibility",
+            attributes: [.font: NSFont.systemFont(ofSize: 11),
+                         .foregroundColor: NSColor.secondaryLabelColor]))
+        head.attributedTitle = title
+        m.addItem(head)
+        if !ready {
+            m.addItem(item("Open Accessibility Settings…", symbol: "lock.open",
+                           action: #selector(fixPermissions)))
         }
         m.addItem(.separator())
 
-        let paste = NSMenuItem(title: "Paste into the focused field",
-                               action: #selector(togglePaste), keyEquivalent: "")
-        paste.target = self
-        paste.state = Prefs.autoPaste ? .on : .off
-        m.addItem(paste)
-
-        let snd = NSMenuItem(title: "Sound cues", action: #selector(toggleSounds), keyEquivalent: "")
-        snd.target = self
-        snd.state = Prefs.sounds ? .on : .off
-        m.addItem(snd)
-
-        let login = NSMenuItem(title: "Start at login", action: #selector(toggleLogin), keyEquivalent: "")
-        login.target = self
-        login.state = loginEnabled ? .on : .off
-        m.addItem(login)
+        // Language, as a submenu with the cycle hint where the eye lands.
+        let langItem = item("Language — \(state.lang.label)", symbol: "globe")
+        langItem.isEnabled = true
+        let sub = NSMenu()
+        sub.autoenablesItems = false
+        for l in Lang.allCases {
+            let it = item(l.long, action: #selector(pickLang(_:)), checked: l == state.lang)
+            it.representedObject = l.rawValue
+            sub.addItem(it)
+        }
+        sub.addItem(.separator())
+        sub.addItem(item("⌃⌥.  cycles from anywhere", enabled: false))
+        langItem.submenu = sub
+        m.addItem(langItem)
         m.addItem(.separator())
 
-        let count = NSMenuItem(title: "\(Prefs.totalWords.formatted()) words dictated", action: nil, keyEquivalent: "")
-        count.isEnabled = false
-        m.addItem(count)
+        m.addItem(item("Paste into the focused field", symbol: "cursorarrow.and.square.on.square.dashed",
+                       action: #selector(togglePaste), checked: Prefs.autoPaste))
+        m.addItem(item("Sound cues", symbol: "speaker.wave.2",
+                       action: #selector(toggleSounds), checked: Prefs.sounds))
+        m.addItem(item("Start at login", symbol: "power",
+                       action: #selector(toggleLogin), checked: loginEnabled))
+        m.addItem(.separator())
 
+        if Prefs.totalWords > 0 {
+            m.addItem(item("\(Prefs.totalWords.formatted()) words dictated",
+                           symbol: "text.word.spacing", enabled: false))
+        }
         if Paths.whisper == nil {
-            let w = NSMenuItem(title: "⚠︎ whisper-cli not found", action: nil, keyEquivalent: "")
-            w.isEnabled = false; m.addItem(w)
+            m.addItem(item("whisper-cli not found — brew install whisper-cpp",
+                           symbol: "exclamationmark.triangle", enabled: false))
         }
         if !Paths.modelExists {
-            let w = NSMenuItem(title: "⚠︎ model missing", action: nil, keyEquivalent: "")
-            w.isEnabled = false; m.addItem(w)
+            m.addItem(item("Model missing from ~/.local/share/whisper-models",
+                           symbol: "exclamationmark.triangle", enabled: false))
         }
-        m.addItem(.separator())
-        m.addItem(NSMenuItem(title: "Quit Murmur", action: #selector(NSApplication.terminate(_:)), keyEquivalent: "q"))
+        if Prefs.totalWords > 0 || Paths.whisper == nil || !Paths.modelExists {
+            m.addItem(.separator())
+        }
+
+        m.addItem(item("View on GitHub", symbol: "arrow.up.right.square",
+                       action: #selector(openRepo)))
+        m.addItem(item("Quit Murmur", action: #selector(NSApplication.terminate(_:)), key: "q"))
         statusItem.menu = m
     }
 
-    // MARK: Menu actions
+        // MARK: Menu actions
 
     @objc private func pickLang(_ sender: NSMenuItem) {
         guard let raw = sender.representedObject as? String, let l = Lang(rawValue: raw) else { return }
         state.lang = l
         Prefs.lang = l
         refreshStatusIcon()
+    }
+    @objc private func openRepo() {
+        NSWorkspace.shared.open(URL(string: "https://github.com/YahyaElghobashy/murmur")!)
     }
     @objc private func togglePaste()  { Prefs.autoPaste.toggle(); rebuildMenu() }
     @objc private func toggleSounds() { Prefs.sounds.toggle(); rebuildMenu() }

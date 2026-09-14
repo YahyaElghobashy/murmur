@@ -3,17 +3,21 @@ import SwiftUI
 
 // MARK: - Design tokens
 
+/// Breath palette. The bubble commits to the brand's dark card in both system
+/// themes, the way the menu-bar glyph stays monochrome: one deliberate look.
 enum T {
     static let radius: CGFloat = 16
-    static let stroke = Color.white.opacity(0.10)
-    static let fg = Color.primary
-    static let muted = Color.primary.opacity(0.55)
-    static let faint = Color.primary.opacity(0.35)
+    static let char   = Color(red: 0.090, green: 0.082, blue: 0.102)  // Char  #17151A
+    static let sand   = Color(red: 0.937, green: 0.918, blue: 0.886)  // Sand  #EFEAE2
     static let accent = Color(red: 0.851, green: 0.447, blue: 0.306)  // Ember #D9724E
-    static let sand   = Color(red: 0.937, green: 0.918, blue: 0.886)  // Sand #EFEAE2
-    static let good = Color(red: 0.33, green: 0.67, blue: 0.24)
-    static let bad = Color(red: 0.85, green: 0.27, blue: 0.29)
-    static let warn = Color(red: 0.79, green: 0.54, blue: 0.18)
+    static let stone  = Color(red: 0.486, green: 0.455, blue: 0.502)  // Stone #7C7480
+    static let stroke = sand.opacity(0.10)
+    static let fg = sand
+    static let muted = sand.opacity(0.55)
+    static let faint = sand.opacity(0.38)
+    static let good = Color(red: 0.42, green: 0.72, blue: 0.34)
+    static let bad = Color(red: 0.89, green: 0.38, blue: 0.40)
+    static let warn = Color(red: 0.85, green: 0.62, blue: 0.28)
 
     static func mono(_ s: CGFloat, _ w: Font.Weight = .medium) -> Font {
         .system(size: s, weight: w, design: .monospaced)
@@ -24,6 +28,24 @@ enum T {
 }
 
 // MARK: - Small parts
+
+/// The decay mark, leading every bubble state. Loaded once from the bundle;
+/// absent in dev harnesses, where the bubble simply runs without it.
+private struct BrandMark: View {
+    static let image: NSImage? = {
+        guard let url = Bundle.main.url(forResource: "HudMark@2x", withExtension: "png"),
+              let img = NSImage(contentsOf: url) else { return nil }
+        img.size = NSSize(width: img.size.width / 2, height: img.size.height / 2)
+        return img
+    }()
+    var body: some View {
+        if let img = Self.image {
+            Image(nsImage: img)
+                .padding(.trailing, 1)
+                .accessibilityLabel("Murmur")
+        }
+    }
+}
 
 private struct Pill: View {
     let text: String
@@ -97,7 +119,7 @@ private struct CtlButton: View {
         Button(action: action) {
             HStack(spacing: 4) {
                 Image(systemName: system).font(.system(size: 9.5, weight: .bold))
-                Text(label).font(T.ui(11, .semibold))
+                if !label.isEmpty { Text(label).font(T.ui(11, .semibold)) }
             }
             .foregroundColor(tone)
             .padding(.horizontal, 9).padding(.vertical, 5)
@@ -137,6 +159,7 @@ struct HUDView: View {
 
     var body: some View {
         HStack(spacing: 11) {
+            BrandMark()
             content
         }
         .padding(.horizontal, 14)
@@ -146,6 +169,8 @@ struct HUDView: View {
             ZStack {
                 RoundedRectangle(cornerRadius: T.radius, style: .continuous)
                     .fill(.ultraThinMaterial)
+                RoundedRectangle(cornerRadius: T.radius, style: .continuous)
+                    .fill(T.char.opacity(0.78))
                 RoundedRectangle(cornerRadius: T.radius, style: .continuous)
                     .strokeBorder(T.stroke, lineWidth: 1)
             }
@@ -183,8 +208,9 @@ struct HUDView: View {
                           tone: T.fg) { state.onPauseToggle?() }
                 CtlButton(system: "stop.fill", label: "Stop",
                           tone: T.accent) { state.onStop?() }
-                CtlButton(system: "xmark", label: "Discard",
+                CtlButton(system: "xmark", label: "",
                           tone: T.bad) { state.onCancel?() }
+                    .help("Discard the recording")
             } else {
                 Pill(text: state.lang.label, tone: T.accent)
             }

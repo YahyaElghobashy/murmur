@@ -2,3 +2,4 @@ build/
 .DS_Store
 brandkit/archive/files/
 signing/*.p12
+brandkit/

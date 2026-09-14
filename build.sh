@@ -16,6 +16,8 @@ cp Info.plist "$APP/Contents/Info.plist"
 cp Assets/Murmur.icns "$APP/Contents/Resources/Murmur.icns"
 cp Assets/MenuGlyph.png "$APP/Contents/Resources/MenuGlyph.png"
 cp "Assets/MenuGlyph@2x.png" "$APP/Contents/Resources/MenuGlyph@2x.png"
+cp Assets/HudMark.png "$APP/Contents/Resources/HudMark.png"
+cp "Assets/HudMark@2x.png" "$APP/Contents/Resources/HudMark@2x.png"
 
 # Sign with the local self-signed identity when it exists, so the designated
 # requirement stays constant and macOS keeps the Accessibility grant across
