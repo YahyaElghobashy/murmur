@@ -17,10 +17,18 @@ cp Assets/Murmur.icns "$APP/Contents/Resources/Murmur.icns"
 cp Assets/MenuGlyph.png "$APP/Contents/Resources/MenuGlyph.png"
 cp "Assets/MenuGlyph@2x.png" "$APP/Contents/Resources/MenuGlyph@2x.png"
 
-echo "==> signing (ad-hoc)"
-# Ad-hoc signature. Keeps the bundle launchable and keeps TCC grants stable
-# as long as the bundle id and path do not change.
-codesign --force --deep --sign - --identifier com.yahyaelghobashy.murmur "$APP"
+# Sign with the local self-signed identity when it exists, so the designated
+# requirement stays constant and macOS keeps the Accessibility grant across
+# rebuilds. Ad-hoc signatures are content-derived, so every rebuild would
+# otherwise invalidate the grant and the toggle would lie about being on.
+IDENTITY="Murmur Local Signing"
+if security find-certificate -c "$IDENTITY" >/dev/null 2>&1; then
+  echo "==> signing as $IDENTITY"
+else
+  echo "==> signing (ad-hoc; run signing/create-identity.sh for a stable grant)"
+  IDENTITY="-"
+fi
+codesign --force --deep --sign "$IDENTITY" --identifier com.yahyaelghobashy.murmur "$APP"
 codesign --verify --verbose=1 "$APP" 2>&1 | sed 's/^/    /'
 
 echo "==> built $APP"
