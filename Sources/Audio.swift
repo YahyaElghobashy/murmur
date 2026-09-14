@@ -70,11 +70,37 @@ final class Recorder {
         AVLinearPCMIsNonInterleaved: false,
     ]
 
-    var duration: TimeInterval { startedAt.map { Date().timeIntervalSince($0) } ?? 0 }
+    private var pausedAt: Date?
+    private var pausedTotal: TimeInterval = 0
+
+    /// Wall clock minus whatever was spent paused, so the timer matches the audio.
+    var duration: TimeInterval {
+        guard let startedAt else { return 0 }
+        let now = pausedAt ?? Date()
+        return now.timeIntervalSince(startedAt) - pausedTotal
+    }
+    var isPaused: Bool { pausedAt != nil }
+
+    /// Stops rendering without tearing the graph down, so the wav simply has no
+    /// frames for the paused stretch and stays one continuous file.
+    func pause() {
+        guard engine.isRunning, pausedAt == nil else { return }
+        engine.pause()
+        pausedAt = Date()
+    }
+
+    func resume() {
+        guard let at = pausedAt else { return }
+        pausedTotal += Date().timeIntervalSince(at)
+        pausedAt = nil
+        try? engine.start()
+    }
     var sawSound: Bool { peak > Limits.silenceRMSFloor }
 
     func start() throws {
         peak = 0
+        pausedAt = nil
+        pausedTotal = 0
         let input = engine.inputNode
         let hw = input.outputFormat(forBus: 0)
         guard hw.sampleRate > 0, hw.channelCount > 0 else { throw VoiceError.noInput }

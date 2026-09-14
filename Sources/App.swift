@@ -38,6 +38,10 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         buildStatusItem()
         wireHotkey()
 
+        state.onPauseToggle = { [weak self] in self?.togglePause() }
+        state.onStop        = { [weak self] in self?.finishRecording() }
+        state.onCancel      = { [weak self] in self?.cancel() }
+
         recorder.onLevel = { [weak self] v in
             guard let self else { return }
             self.state.level = self.state.level * 0.55 + v * 0.45      // smoothing
@@ -45,7 +49,12 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 
         state.$phase
             .receive(on: RunLoop.main)
-            .sink { [weak self] _ in self?.refreshStatusIcon() }
+            .sink { [weak self] p in
+                guard let self else { return }
+                self.refreshStatusIcon()
+                if case .recording(true, _) = p { self.hud.setInteractive(true) }
+                else { self.hud.setInteractive(false) }
+            }
             .store(in: &bag)
 
         // A tap that gets disabled by the system must be revived, or the app goes quietly deaf.
@@ -106,10 +115,16 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     // MARK: Hotkey wiring
 
     private func wireHotkey() {
-        hotkey.onPressStart = { [weak self] in self?.beginRecording(locked: false) }
+        hotkey.onPressStart = { [weak self] in
+            guard let self else { return }
+            // A second chord while locked ends the run rather than starting a new one.
+            if self.state.isLocked { self.finishRecording() } else { self.beginRecording(locked: false) }
+        }
         hotkey.onDoubleTap  = { [weak self] in self?.lockRecording() }
         hotkey.onPressEnd   = { [weak self] in self?.releaseKey() }
-        hotkey.onForeignKey = { [weak self] in self?.stopIfLocked() }
+        // Typing no longer ends a locked run; that made hands-free dictation
+        // fragile. The bubble's Stop button, the chord, or Escape end it.
+        hotkey.onForeignKey = { }
         hotkey.onEscape     = { [weak self] in self?.cancel() }
         hotkey.onCycleLang  = { [weak self] in
             guard let self else { return }
@@ -136,14 +151,14 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         recordingStart = Date()
         state.level = 0
         state.elapsed = 0
-        state.phase = .recording(locked: locked)
+        state.phase = .recording(locked: locked, paused: false)
         hud.show()
         Sound.start()
 
         ticker?.invalidate()
         ticker = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { [weak self] _ in
-            guard let self, let s = self.recordingStart else { return }
-            self.state.elapsed = Date().timeIntervalSince(s)
+            guard let self, self.recordingStart != nil else { return }
+            self.state.elapsed = self.recorder.duration
             if self.state.elapsed >= Limits.maxRecordSeconds {
                 self.finishRecording()
             }
@@ -152,8 +167,10 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 
     private func lockRecording() {
         switch state.phase {
-        case .recording:
-            state.phase = .recording(locked: true)
+        case .recording(_, let paused):
+            state.phase = .recording(locked: true, paused: paused)
+            hud.setInteractive(true)
+            hud.show()
             Sound.tick()
         case .idle:
             beginRecording(locked: true)
@@ -162,17 +179,28 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     private func releaseKey() {
-        guard case .recording(let locked) = state.phase else { return }
-        if locked { return }                       // locked runs until a key or Escape
+        guard case .recording(let locked, _) = state.phase else { return }
+        if locked { return }               // locked runs until Stop, ⌃⌥/ again, or Escape
         finishRecording()
     }
 
+    /// Pressing the chord again during a locked run ends it, so the keyboard
+    /// still works for anyone who does not want to reach for the bubble.
     private func stopIfLocked() {
-        if case .recording(true) = state.phase { finishRecording() }
+        if case .recording(true, _) = state.phase { finishRecording() }
+    }
+
+    private func togglePause() {
+        guard case .recording(let locked, let paused) = state.phase else { return }
+        if paused { recorder.resume() } else { recorder.pause() }
+        state.phase = .recording(locked: locked, paused: !paused)
+        Sound.tick()
+        hud.show()
     }
 
     private func cancel() {
         guard state.isBusy else { return }
+        hud.setInteractive(false)
         ticker?.invalidate(); ticker = nil
         recordingStart = nil
         recorder.discard()
@@ -182,6 +210,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 
     private func finishRecording() {
         guard case .recording = state.phase else { return }
+        if recorder.isPaused { recorder.resume() }      // flush the graph before closing
         ticker?.invalidate(); ticker = nil
         recordingStart = nil
 

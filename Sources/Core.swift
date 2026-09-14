@@ -84,7 +84,7 @@ enum Limits {
 
 enum Phase: Equatable {
     case idle
-    case recording(locked: Bool)
+    case recording(locked: Bool, paused: Bool)
     case transcribing
     case done(text: String, pasted: Bool)
     case failed(String)
@@ -104,6 +104,22 @@ final class AppState: ObservableObject {
         default: return false
         }
     }
+
+    /// True only while a locked run is in progress, which is when the HUD
+    /// becomes clickable and shows its controls.
+    var isLocked: Bool {
+        if case .recording(true, _) = phase { return true }
+        return false
+    }
+    var isPaused: Bool {
+        if case .recording(_, true) = phase { return true }
+        return false
+    }
+
+    // Wired by the app delegate; called from the HUD's buttons.
+    var onPauseToggle: (() -> Void)?
+    var onStop: (() -> Void)?
+    var onCancel: (() -> Void)?
 
     func cycleLang() {
         lang = lang.next

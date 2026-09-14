@@ -84,6 +84,38 @@ private struct Dot: View {
     }
 }
 
+/// A compact control for the locked bubble. Deliberately low-contrast until
+/// hovered, so the bubble stays calm while still being obviously clickable.
+private struct CtlButton: View {
+    let system: String
+    let label: String
+    var tone: Color = T.fg
+    let action: () -> Void
+    @State private var hovering = false
+
+    var body: some View {
+        Button(action: action) {
+            HStack(spacing: 4) {
+                Image(systemName: system).font(.system(size: 9.5, weight: .bold))
+                Text(label).font(T.ui(11, .semibold))
+            }
+            .foregroundColor(tone)
+            .padding(.horizontal, 9).padding(.vertical, 5)
+            .background(
+                RoundedRectangle(cornerRadius: 7, style: .continuous)
+                    .fill(tone.opacity(hovering ? 0.22 : 0.12))
+            )
+            .overlay(
+                RoundedRectangle(cornerRadius: 7, style: .continuous)
+                    .strokeBorder(tone.opacity(hovering ? 0.35 : 0.0), lineWidth: 1)
+            )
+        }
+        .buttonStyle(.plain)
+        .onHover { hovering = $0 }
+        .help(label)
+    }
+}
+
 private struct Spinner: View {
     @State private var spin = false
     var body: some View {
@@ -129,20 +161,33 @@ struct HUDView: View {
         case .idle:
             EmptyView()
 
-        case .recording(let locked):
-            Dot(color: T.bad, pulse: true)
-            Meter(level: state.level)
+        case .recording(let locked, let paused):
+            Dot(color: paused ? T.warn : T.accent, pulse: !paused)
+            Meter(level: paused ? 0 : state.level)
+                .opacity(paused ? 0.3 : 1)
             VStack(alignment: .leading, spacing: 2) {
-                Text(locked ? "Locked on" : "Listening")
+                Text(paused ? "Paused" : (locked ? "Locked on" : "Listening"))
                     .font(T.ui(13, .semibold)).foregroundColor(T.fg)
-                Text(locked ? "Any key to stop" : "Release to transcribe")
+                Text(paused ? "Resume or stop when ready"
+                            : (locked ? "Hands free" : "Release to transcribe"))
                     .font(T.ui(10.5)).foregroundColor(T.faint)
             }
             Spacer(minLength: 2)
             Text(timeString(state.elapsed))
                 .font(T.mono(11, .semibold)).foregroundColor(T.muted)
                 .monospacedDigit()
-            Pill(text: state.lang.label, tone: T.accent)
+
+            if locked {
+                CtlButton(system: paused ? "play.fill" : "pause.fill",
+                          label: paused ? "Resume" : "Pause",
+                          tone: T.fg) { state.onPauseToggle?() }
+                CtlButton(system: "stop.fill", label: "Stop",
+                          tone: T.accent) { state.onStop?() }
+                CtlButton(system: "xmark", label: "Discard",
+                          tone: T.bad) { state.onCancel?() }
+            } else {
+                Pill(text: state.lang.label, tone: T.accent)
+            }
 
         case .transcribing:
             Spinner()
@@ -204,9 +249,17 @@ final class HUDController {
 
     init(state: AppState) { self.state = state }
 
+    /// The bubble is click-through except during a locked run, where it carries
+    /// the pause and stop controls. A nonactivating panel takes those clicks
+    /// without pulling focus off whatever is being dictated into.
+    func setInteractive(_ on: Bool) {
+        panel?.ignoresMouseEvents = !on
+    }
+
     func show() {
         hideWork?.cancel()
         if panel == nil { build() }
+        panel?.ignoresMouseEvents = !state.isLocked
         position()
         panel?.alphaValue = 0
         panel?.orderFrontRegardless()
@@ -244,7 +297,7 @@ final class HUDController {
         p.level = .statusBar
         p.isFloatingPanel = true
         p.hidesOnDeactivate = false
-        p.ignoresMouseEvents = true         // never steals a click
+        p.ignoresMouseEvents = true         // flipped on for the locked bubble only
         p.collectionBehavior = [.canJoinAllSpaces, .fullScreenAuxiliary, .stationary]
         panel = p
     }
