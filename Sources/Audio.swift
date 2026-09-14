@@ -53,14 +53,22 @@ final class Recorder {
     private var url: URL?
     private var startedAt: Date?
     private var peak: Float = 0
+    /// The tap runs on a realtime audio thread while stop() runs on main.
+    /// Every touch of `file` is serialised through this.
+    private let lock = NSLock()
 
-    /// Smoothed 0…1 level for the meter.
     var onLevel: ((Float) -> Void)?
 
-    private let target = AVAudioFormat(commonFormat: .pcmFormatInt16,
-                                       sampleRate: 16_000,
-                                       channels: 1,
-                                       interleaved: true)!
+    /// What lands on disk: 16 kHz mono signed 16-bit, exactly what whisper wants.
+    private let diskSettings: [String: Any] = [
+        AVFormatIDKey: kAudioFormatLinearPCM,
+        AVSampleRateKey: 16_000.0,
+        AVNumberOfChannelsKey: 1,
+        AVLinearPCMBitDepthKey: 16,
+        AVLinearPCMIsFloatKey: false,
+        AVLinearPCMIsBigEndianKey: false,
+        AVLinearPCMIsNonInterleaved: false,
+    ]
 
     var duration: TimeInterval { startedAt.map { Date().timeIntervalSince($0) } ?? 0 }
     var sawSound: Bool { peak > Limits.silenceRMSFloor }
@@ -71,17 +79,20 @@ final class Recorder {
         let hw = input.outputFormat(forBus: 0)
         guard hw.sampleRate > 0, hw.channelCount > 0 else { throw VoiceError.noInput }
 
-        guard let conv = AVAudioConverter(from: hw, to: target) else {
-            throw VoiceError.engineFailed("cannot convert \(Int(hw.sampleRate))Hz to 16kHz")
-        }
-        converter = conv
-
         let dir = FileManager.default.temporaryDirectory
             .appendingPathComponent("murmur", isDirectory: true)
         try? FileManager.default.createDirectory(at: dir, withIntermediateDirectories: true)
         let out = dir.appendingPathComponent("clip-\(UUID().uuidString).wav")
         url = out
-        file = try AVAudioFile(forWriting: out, settings: target.settings)
+
+        let f = try AVAudioFile(forWriting: out, settings: diskSettings)
+        // AVAudioFile encodes to diskSettings on write, but write(from:) demands a buffer
+        // in processingFormat, which is float32. Converting to anything else traps.
+        guard let conv = AVAudioConverter(from: hw, to: f.processingFormat) else {
+            throw VoiceError.engineFailed("cannot convert \(Int(hw.sampleRate))Hz to 16kHz")
+        }
+        lock.lock(); file = f; lock.unlock()
+        converter = conv
 
         input.installTap(onBus: 0, bufferSize: 4096, format: hw) { [weak self] buf, _ in
             self?.consume(buf)
@@ -92,9 +103,6 @@ final class Recorder {
     }
 
     private func consume(_ buf: AVAudioPCMBuffer) {
-        guard let conv = converter, let file else { return }
-
-        // level meter, computed on the hardware buffer
         if let ch = buf.floatChannelData?[0] {
             var sum: Float = 0
             let n = Int(buf.frameLength)
@@ -105,6 +113,11 @@ final class Recorder {
             DispatchQueue.main.async { self.onLevel?(shaped) }
         }
 
+        lock.lock()
+        defer { lock.unlock() }
+        guard let conv = converter, let file else { return }
+
+        let target = file.processingFormat
         let ratio = target.sampleRate / buf.format.sampleRate
         let cap = AVAudioFrameCount(Double(buf.frameLength) * ratio) + 1024
         guard let out = AVAudioPCMBuffer(pcmFormat: target, frameCapacity: cap) else { return }
@@ -118,10 +131,9 @@ final class Recorder {
             return buf
         }
         guard err == nil, out.frameLength > 0 else { return }
-        try? file.write(from: out)
+        do { try file.write(from: out) } catch { NSLog("[murmur] write failed: %@", "\(error)") }
     }
 
-    /// Stops capture and hands back the finished wav.
     @discardableResult
     func stop() -> (url: URL?, seconds: TimeInterval) {
         let secs = duration
@@ -129,7 +141,7 @@ final class Recorder {
             engine.inputNode.removeTap(onBus: 0)
             engine.stop()
         }
-        file = nil          // closing the AVAudioFile finalises the wav header
+        lock.lock(); file = nil; lock.unlock()   // closing finalises the wav header
         converter = nil
         startedAt = nil
         let u = url
