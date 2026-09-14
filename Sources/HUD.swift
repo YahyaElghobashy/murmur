@@ -63,6 +63,78 @@ private struct Pill: View {
     }
 }
 
+/// The mark itself is the live indicator while recording: the Ember disc is
+/// the recording light, pulsing, and the crescents drift gently left and
+/// right like air carrying the sound. Paused, everything settles and dims.
+private struct AnimatedMark: View {
+    var paused: Bool
+
+    private struct HalfDisc: Shape {
+        func path(in rect: CGRect) -> Path {
+            var p = Path()
+            p.move(to: CGPoint(x: rect.minX, y: rect.minY))
+            p.addArc(center: CGPoint(x: rect.minX, y: rect.midY),
+                     radius: rect.height / 2,
+                     startAngle: .degrees(-90), endAngle: .degrees(90), clockwise: false)
+            p.closeSubpath()
+            return p
+        }
+    }
+
+    private func pulse(_ t: Double) -> CGFloat {
+        if paused { return 1 }
+        let wave: Double = 0.5 + 0.5 * sin(t * 2 * Double.pi / 1.2)
+        return CGFloat(1.0 + 0.10 * wave)
+    }
+    private func drift(_ t: Double, _ i: Int) -> CGFloat {
+        if paused { return 0 }
+        let period: Double = 1.5 + Double(i) * 0.25
+        let phase: Double = Double(i) * 1.9
+        return CGFloat(sin(t * 2 * Double.pi / period + phase) * 1.3)
+    }
+    private static let heights: [CGFloat] = [11, 8.5, 6]
+
+    var body: some View {
+        TimelineView(.animation(minimumInterval: 1.0 / 30.0, paused: paused)) { ctx in
+            let t: Double = ctx.date.timeIntervalSinceReferenceDate
+            HStack(alignment: .center, spacing: 3) {
+                Circle()
+                    .fill(T.accent)
+                    .frame(width: 13, height: 13)
+                    .scaleEffect(pulse(t))
+                    .shadow(color: T.accent.opacity(paused ? 0 : 0.5), radius: 3.5 * pulse(t))
+                ForEach(0..<3, id: \.self) { i in
+                    HalfDisc()
+                        .fill(T.sand.opacity(paused ? 0.4 : 0.92))
+                        .frame(width: Self.heights[i] / 2 + 1.5, height: Self.heights[i])
+                        .offset(x: drift(t, i))
+                }
+            }
+            .opacity(paused ? 0.75 : 1)
+        }
+        .frame(height: 16)
+        .accessibilityLabel(paused ? "Paused" : "Recording")
+    }
+}
+
+/// A real level meter: the rolling history of what the microphone heard,
+/// newest at the right. Silence reads flat; speech reads as movement.
+private struct LiveMeter: View {
+    let levels: [Float]
+    var dimmed: Bool = false
+    var body: some View {
+        HStack(alignment: .center, spacing: 2) {
+            ForEach(Array(levels.enumerated()), id: \.offset) { _, v in
+                Capsule(style: .continuous)
+                    .fill(T.accent.opacity(dimmed ? 0.22 : 0.35 + 0.65 * Double(min(1, v))))
+                    .frame(width: 2.5, height: max(2.5, CGFloat(min(1, v)) * 22))
+            }
+        }
+        .frame(height: 22)
+        .animation(.linear(duration: 0.08), value: levels)
+    }
+}
+
 /// Five bars that ride the mic level, with a gentle idle shimmer so it never looks dead.
 private struct Meter: View {
     let level: Float
@@ -119,7 +191,7 @@ private struct CtlButton: View {
         Button(action: action) {
             HStack(spacing: 4) {
                 Image(systemName: system).font(.system(size: 9.5, weight: .bold))
-                if !label.isEmpty { Text(label).font(T.ui(11, .semibold)) }
+                if !label.isEmpty { Text(label).font(T.ui(11, .semibold)).fixedSize() }
             }
             .foregroundColor(tone)
             .padding(.horizontal, 9).padding(.vertical, 5)
@@ -159,7 +231,7 @@ struct HUDView: View {
 
     var body: some View {
         HStack(spacing: 11) {
-            BrandMark()
+            if case .recording = state.phase {} else { BrandMark() }
             content
         }
         .padding(.horizontal, 14)
@@ -187,9 +259,8 @@ struct HUDView: View {
             EmptyView()
 
         case .recording(let locked, let paused):
-            Dot(color: paused ? T.warn : T.accent, pulse: !paused)
-            Meter(level: paused ? 0 : state.level)
-                .opacity(paused ? 0.3 : 1)
+            AnimatedMark(paused: paused)
+            LiveMeter(levels: state.levels, dimmed: paused)
             VStack(alignment: .leading, spacing: 2) {
                 Text(paused ? "Paused" : (locked ? "Locked on" : "Listening"))
                     .font(T.ui(13, .semibold)).foregroundColor(T.fg)

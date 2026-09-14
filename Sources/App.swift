@@ -44,7 +44,8 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 
         recorder.onLevel = { [weak self] v in
             guard let self else { return }
-            self.state.level = self.state.level * 0.55 + v * 0.45      // smoothing
+            self.state.level = self.state.level * 0.55 + v * 0.45
+            self.state.pushLevel(v)
         }
 
         state.$phase

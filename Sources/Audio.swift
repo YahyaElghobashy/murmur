@@ -135,7 +135,9 @@ final class Recorder {
             for i in 0..<n { sum += ch[i] * ch[i] }
             let rms = n > 0 ? (sum / Float(n)).squareRoot() : 0
             if rms > peak { peak = rms }
-            let shaped = min(1, max(0, rms * 12))
+            // A power curve lifts quiet speech into the visible range while
+            // keeping true silence at the floor, like the system mic meter.
+            let shaped = min(1, pow(max(0, rms) * 16, 0.72))
             DispatchQueue.main.async { self.onLevel?(shaped) }
         }
 

@@ -94,6 +94,9 @@ enum Phase: Equatable {
 final class AppState: ObservableObject {
     @Published var phase: Phase = .idle
     @Published var level: Float = 0          // 0…1 smoothed mic level
+    /// Rolling window of recent mic levels, newest last. The meter renders this
+    /// directly, so silence is visibly flat and speech visibly is not.
+    @Published var levels: [Float] = Array(repeating: 0, count: 12)
     @Published var elapsed: TimeInterval = 0
     @Published var lang: Lang = Prefs.lang
     @Published var hudVisible: Bool = false
@@ -120,6 +123,11 @@ final class AppState: ObservableObject {
     var onPauseToggle: (() -> Void)?
     var onStop: (() -> Void)?
     var onCancel: (() -> Void)?
+
+    func pushLevel(_ v: Float) {
+        levels.removeFirst()
+        levels.append(v)
+    }
 
     func cycleLang() {
         lang = lang.next
