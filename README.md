@@ -1,3 +1,9 @@
+> [!NOTE]
+> **Murmur now lives inside [Deck](https://github.com/YahyaElghobashy/deck-mac).**
+> Same dictation, same whisper.cpp, same nothing-leaves-your-Mac promise — now sharing a menu bar
+> with push-to-talk Alexa control and a desktop widget. The chord moved to **⌃⌥Z**.
+> This repository stays up as the standalone app and its history.
+
 <p align="center">
   <img src="Assets/screenshots/icon.png" width="128" alt="Murmur icon">
 </p>
