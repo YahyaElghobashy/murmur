@@ -410,6 +410,8 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         m.addItem(item("View on GitHub", symbol: "arrow.up.right.square",
                        action: #selector(openRepo)))
         m.addItem(item("Quit Murmur", action: #selector(NSApplication.terminate(_:)), key: "q"))
+        m.addItem(.separator())
+        m.addItem(MadeBy.menuItem())
         statusItem.menu = m
     }
 

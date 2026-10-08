@@ -10,7 +10,8 @@ echo "==> compiling (swift $(swift --version 2>&1 | head -1 | sed 's/.*version /
 swiftc -O -parse-as-library \
   -target arm64-apple-macos13.0 \
   -o "$APP/Contents/MacOS/Murmur" \
-  Sources/Diag.swift Sources/Core.swift Sources/Audio.swift Sources/HUD.swift Sources/App.swift
+  Sources/Diag.swift Sources/Core.swift Sources/Audio.swift Sources/HUD.swift Sources/App.swift \
+  Sources/MadeByFooter.swift
 
 cp Info.plist "$APP/Contents/Info.plist"
 cp Assets/Murmur.icns "$APP/Contents/Resources/Murmur.icns"

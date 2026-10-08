@@ -138,7 +138,7 @@ private struct LiveMeter: View {
 /// Five bars that ride the mic level, with a gentle idle shimmer so it never looks dead.
 private struct Meter: View {
     let level: Float
-    @State private var phase: Double = 0
+    @Local private var phase: Double = 0
     private let bars = 5
 
     var body: some View {
@@ -165,7 +165,7 @@ private struct Meter: View {
 private struct Dot: View {
     let color: Color
     var pulse: Bool = false
-    @State private var on = false
+    @Local private var on = false
     var body: some View {
         Circle()
             .fill(color)
@@ -185,7 +185,7 @@ private struct CtlButton: View {
     let label: String
     var tone: Color = T.fg
     let action: () -> Void
-    @State private var hovering = false
+    @Local private var hovering = false
 
     var body: some View {
         Button(action: action) {
@@ -211,7 +211,7 @@ private struct CtlButton: View {
 }
 
 private struct Spinner: View {
-    @State private var spin = false
+    @Local private var spin = false
     var body: some View {
         Circle()
             .trim(from: 0, to: 0.72)
@@ -413,4 +413,26 @@ final class HUDController {
         let y = vf.minY + 64
         p.setFrameOrigin(NSPoint(x: x.rounded(), y: y.rounded()))
     }
+}
+
+// MARK: - Local view state
+//
+// The macOS 26+/27 SDKs turn the `@State` *attribute* into a compiler macro backed by a plugin
+// that only ships inside Xcode. Murmur builds with Command Line Tools only, so `@Local` wraps the
+// (macro-free) `State<Value>` struct directly: identical semantics, different spelling.
+
+@propertyWrapper
+struct Local<Value>: DynamicProperty {
+    private var storage: SwiftUI.State<Value>
+
+    init(wrappedValue: Value) {
+        storage = SwiftUI.State(wrappedValue: wrappedValue)
+    }
+
+    var wrappedValue: Value {
+        get { storage.wrappedValue }
+        nonmutating set { storage.wrappedValue = newValue }
+    }
+
+    var projectedValue: Binding<Value> { storage.projectedValue }
 }
