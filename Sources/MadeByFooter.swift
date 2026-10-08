@@ -114,14 +114,15 @@ extension MadeByFooter {
 }
 
 extension MadeBy {
-    /// Native status-menu item for apps without a Settings window: the portrait, "Made by …",
-    /// and a click that opens `profileURL`. Add it as the menu's last item.
+    /// Status-menu item for apps without a Settings window: the portrait, "Made by …", a hover wink,
+    /// and a click that opens `profileURL` and closes the menu. Add it as the menu's last item.
+    /// It is a custom view because macOS 26+ menus no longer draw `NSMenuItem.image`.
     @preconcurrency @MainActor static func menuItem() -> NSMenuItem {
         let item = NSMenuItem(title: "Made by \(name)",
                               action: #selector(MadeByMenuTarget.openProfile(_:)), keyEquivalent: "")
         item.target = MadeByMenuTarget.shared
-        item.image = MadeByArt.menuImage
         item.toolTip = profileLabel
+        item.view = MadeByMenuItemView()
         return item
     }
 }
@@ -131,6 +132,68 @@ extension MadeBy {
 
     @objc func openProfile(_ sender: Any?) {
         NSWorkspace.shared.open(MadeBy.profileURL)
+    }
+}
+
+/// The menu row, drawn in AppKit: while a menu tracks the mouse, it reports hover only as the item's
+/// highlight plus a redraw, and SwiftUI views would not refresh until the menu closes.
+@MainActor private final class MadeByMenuItemView: NSView {
+    init() {
+        super.init(frame: NSRect(x: 0, y: 0, width: 250, height: 30))
+        autoresizingMask = [.width]
+        setAccessibilityElement(true)
+        setAccessibilityRole(.menuItem)
+        setAccessibilityLabel("Made by \(MadeBy.name)")
+        setAccessibilityHelp("Opens \(MadeBy.profileLabel) in your browser")
+    }
+
+    @available(*, unavailable)
+    required init?(coder: NSCoder) { fatalError("init(coder:) is not supported") }
+
+    override func draw(_ dirtyRect: NSRect) {
+        let highlighted = enclosingMenuItem?.isHighlighted ?? false
+        let row = bounds.insetBy(dx: 5, dy: 1)
+        if highlighted {
+            NSColor.selectedContentBackgroundColor.setFill()
+            NSBezierPath(roundedRect: row, xRadius: 6, yRadius: 6).fill()
+        }
+
+        let avatar = NSRect(x: row.minX + 9, y: (row.midY - 11).rounded(), width: 22, height: 22)
+        if let image = highlighted ? MadeByArt.wink : MadeByArt.face {
+            NSGraphicsContext.saveGraphicsState()
+            NSGraphicsContext.current?.imageInterpolation = .none
+            NSBezierPath(roundedRect: avatar, xRadius: 5.3, yRadius: 5.3).addClip()
+            image.draw(in: avatar)
+            NSGraphicsContext.restoreGraphicsState()
+        }
+
+        let font = NSFont.menuFont(ofSize: 0)
+        let ink: NSColor = highlighted ? .white : .labelColor
+        let text = NSMutableAttributedString(string: "Made by ", attributes: [
+            .font: font, .foregroundColor: highlighted ? NSColor.white.withAlphaComponent(0.85) : .secondaryLabelColor])
+        text.append(NSAttributedString(string: MadeBy.name, attributes: [
+            .font: NSFont.systemFont(ofSize: font.pointSize, weight: .semibold), .foregroundColor: ink]))
+        let size = text.size()
+        text.draw(at: NSPoint(x: avatar.maxX + 8, y: (row.midY - size.height / 2).rounded()))
+
+        let arrowConfig = NSImage.SymbolConfiguration(pointSize: 9, weight: .bold)
+            .applying(NSImage.SymbolConfiguration(paletteColors: [highlighted ? .white : .secondaryLabelColor]))
+        if let arrow = NSImage(systemSymbolName: "arrow.up.right", accessibilityDescription: nil)?
+            .withSymbolConfiguration(arrowConfig) {
+            arrow.draw(in: NSRect(x: row.maxX - 10 - arrow.size.width, y: (row.midY - arrow.size.height / 2).rounded(),
+                                  width: arrow.size.width, height: arrow.size.height))
+        }
+    }
+
+    override func mouseUp(with event: NSEvent) {
+        enclosingMenuItem?.menu?.cancelTracking()
+        NSWorkspace.shared.open(MadeBy.profileURL)
+    }
+
+    override func accessibilityPerformPress() -> Bool {
+        enclosingMenuItem?.menu?.cancelTracking()
+        NSWorkspace.shared.open(MadeBy.profileURL)
+        return true
     }
 }
 
@@ -204,27 +267,6 @@ private extension View {
     static let cells: CGFloat = 44
     static let face = decode(faceBase64)
     static let wink = decode(winkBase64)
-
-    /// 22 pt portrait for NSMenu items, drawn once at 2x with nearest-neighbour scaling.
-    static let menuImage: NSImage? = {
-        guard let face else { return nil }
-        let points = NSSize(width: 22, height: 22)
-        guard let rep = NSBitmapImageRep(bitmapDataPlanes: nil, pixelsWide: 44, pixelsHigh: 44,
-                                         bitsPerSample: 8, samplesPerPixel: 4, hasAlpha: true, isPlanar: false,
-                                         colorSpaceName: .deviceRGB, bytesPerRow: 0, bitsPerPixel: 0),
-              let context = NSGraphicsContext(bitmapImageRep: rep) else { return nil }
-        rep.size = points
-        NSGraphicsContext.saveGraphicsState()
-        NSGraphicsContext.current = context
-        context.imageInterpolation = .none
-        let rect = NSRect(origin: .zero, size: points)
-        NSBezierPath(roundedRect: rect, xRadius: 5.3, yRadius: 5.3).addClip()
-        face.draw(in: rect)
-        NSGraphicsContext.restoreGraphicsState()
-        let image = NSImage(size: points)
-        image.addRepresentation(rep)
-        return image
-    }()
 
     private static func decode(_ base64: String) -> NSImage? {
         guard let data = Data(base64Encoded: base64) else { return nil }
